@@ -13,7 +13,7 @@ import sys
 # Third Party Code
 # Custom Code
 from pyfuckery.constants import DEFAULT_MEMORY_SIZE, MEMORY_MAX_VALUE, MEMORY_MIN_VALUE
-from pyfuckery.exc import MemoryError, AddressError
+from pyfuckery.exc import StorageError, AddressError
 
 log = logging.getLogger(__name__)
 
@@ -40,9 +40,9 @@ class Storage(object):
         if addr not in self.mem:
             raise AddressError('Address is invalid: {}'.format(addr))
         if not isinstance(value, int):
-            raise MemoryError('Value is not an int: {}'.format(type(value)))
+            raise StorageError('Value is not an int: {}'.format(type(value)))
         if value < self.min or value > self.max:
-            raise MemoryError('Value is out of size bounds: {}'.format(value))
+            raise StorageError('Value is out of size bounds: {}'.format(value))
         self.mem[addr] = value
 
 

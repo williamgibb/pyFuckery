@@ -12,7 +12,7 @@ import logging
 import pytest
 
 # Custom code
-from pyfuckery.exc import MemoryError, AddressError
+from pyfuckery.exc import StorageError, AddressError
 from pyfuckery import memory
 
 # Logging config
@@ -63,18 +63,18 @@ class TestMemory:
             storage.set(1000, 0)
         assert 'Address is invalid' in str(cm.value)
 
-        with pytest.raises(MemoryError) as cm:
+        with pytest.raises(StorageError) as cm:
             storage.set(0, '0x00')
         assert 'Value is not an int' in str(cm.value)
 
-        with pytest.raises(MemoryError) as cm:
+        with pytest.raises(StorageError) as cm:
             storage.set(0, 0.0)
         assert 'Value is not an int' in str(cm.value)
 
-        with pytest.raises(MemoryError) as cm:
+        with pytest.raises(StorageError) as cm:
             storage.set(0, -1)
         assert 'Value is out of size bounds' in str(cm.value)
 
-        with pytest.raises(MemoryError) as cm:
+        with pytest.raises(StorageError) as cm:
             storage.set(0, 256)
         assert 'Value is out of size bounds' in str(cm.value)

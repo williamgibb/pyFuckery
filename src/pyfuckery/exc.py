@@ -14,13 +14,13 @@ class FuckeryError(Exception):
     """
 
 
-class MemoryError(FuckeryError):
+class StorageError(FuckeryError):
     """
     Error doing a memory operation.
     """
 
 
-class AddressError(MemoryError):
+class AddressError(StorageError):
     """
     Error related to address violations.
     """
