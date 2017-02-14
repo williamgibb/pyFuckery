@@ -24,3 +24,9 @@ class AddressError(StorageError):
     """
     Error related to address violations.
     """
+
+
+class VMError(FuckeryError):
+    """
+    Error related to the brainfuck VM
+    """

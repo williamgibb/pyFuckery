@@ -8,12 +8,14 @@ Created on 2/12/17.
 """
 # Stdlib
 import logging
+
 # Third party code
 import pytest
 
-# Custom code
-from pyfuckery.exc import StorageError, AddressError
 from pyfuckery import memory
+# Custom code
+from pyfuckery.exc import AddressError
+from pyfuckery.exc import StorageError
 
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')
@@ -52,6 +54,18 @@ class TestMemory:
         storage.set(addr=addr, value=v)
         r = storage.get(addr=addr)
         assert r == v
+
+    # noinspection PyShadowingNames
+    def test_magic_methods(self, storage: memory.Storage):
+        addr = 10
+        assert 0 in storage
+        assert addr in storage
+        assert TEST_MEMORY_SIZE-1 in storage
+        assert TEST_MEMORY_SIZE not in storage
+        addr = 10000
+        assert addr not in storage
+
+        assert len(storage) == TEST_MEMORY_SIZE
 
     # noinspection PyShadowingNames
     def test_bad_inputs(self, storage: memory.Storage):

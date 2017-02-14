@@ -10,10 +10,14 @@ Memory object implementation.  Provides memory bounds checking, as well as value
 import argparse
 import logging
 import sys
+
 # Third Party Code
 # Custom Code
-from pyfuckery.constants import DEFAULT_MEMORY_SIZE, MEMORY_MAX_VALUE, MEMORY_MIN_VALUE
-from pyfuckery.exc import StorageError, AddressError
+from pyfuckery.constants import DEFAULT_MEMORY_SIZE
+from pyfuckery.constants import MEMORY_MAX_VALUE
+from pyfuckery.constants import MEMORY_MIN_VALUE
+from pyfuckery.exc import AddressError
+from pyfuckery.exc import StorageError
 
 log = logging.getLogger(__name__)
 
@@ -31,13 +35,19 @@ class Storage(object):
         self.max = MEMORY_MAX_VALUE
         self.mem = {i: 0x00 for i in range(self.n)}
 
+    def __contains__(self, item):
+        return item in self.mem
+
+    def __len__(self):
+        return len(self.mem)
+
     def get(self, addr):
-        if addr not in self.mem:
+        if addr not in self:
             raise AddressError('Address is invalid: {}'.format(addr))
         return self.mem.get(addr)
 
     def set(self, addr, value):
-        if addr not in self.mem:
+        if addr not in self:
             raise AddressError('Address is invalid: {}'.format(addr))
         if not isinstance(value, int):
             raise StorageError('Value is not an int: {}'.format(type(value)))

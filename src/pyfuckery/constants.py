@@ -8,11 +8,6 @@ Created on 2/12/17.
 
 """
 # Stdlib
-import logging
-import re
-# Third Party Code
-# Custom Code
-log = logging.getLogger(__name__)
 
 
 # Brainfuck tokens
