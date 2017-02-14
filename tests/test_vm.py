@@ -8,12 +8,13 @@ Created on 2/12/17.
 """
 # Stdlib
 import logging
+
 # Third party code
 import pytest
 
 # Custom code
-from pyfuckery.vm import VirtualMachine
 from pyfuckery.exc import VMError
+from pyfuckery.vm import VirtualMachine
 
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')

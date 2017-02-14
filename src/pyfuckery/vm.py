@@ -9,16 +9,14 @@ Created on 2/12/17.
 """
 # Stdlib
 import argparse
-import json
 import logging
-import os
 import sys
 
 # Third Party Code
 # Custom Code
 from pyfuckery.constants import DEFAULT_MEMORY_SIZE
-from pyfuckery.memory import Storage
 from pyfuckery.exc import VMError
+from pyfuckery.memory import Storage
 
 log = logging.getLogger(__name__)
 
