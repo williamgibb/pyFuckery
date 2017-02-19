@@ -64,7 +64,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     install_requires=[
-       'lark-parser==0.1.0',
+       'lark-parser==0.1.2',
     ],
     extras_require={
         # eg:
