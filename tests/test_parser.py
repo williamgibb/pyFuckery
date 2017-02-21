@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# XXX Update Docstring
 """
 pyFuckery - test_parser.py
 Created on 2/19/17.
 
-
+Tests for the AST parser
 """
 # Stdlib
 import logging
