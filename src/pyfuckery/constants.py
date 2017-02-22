@@ -20,6 +20,11 @@ SYM_IO_INPUT = ','
 SYM_JMP_FWD = '['
 SYM_JMP_BACKWARD = ']'
 
+SYM_PROGRAM = 'program'
+SYM_LOOP = 'loop'
+SYM_ACTIONS = 'actions'
+SYM_EXPRESSIONS = 'expression'
+
 # Default VM configuration
 DEFAULT_MEMORY_SIZE = 30000
 MEMORY_MIN_VALUE = 0
@@ -42,13 +47,13 @@ IGNORE_REGEX = '\{}\{}\{}\{}\{}\{}\{}\{}'.format(SYM_PTR_DEC,
 # which was inspired by https://www.researchgate.net/publication/255592935_Implementing_Brainfuck_in_COLA_Version_2
 GRAMMER = r'''
 
-program: expression*
+{program}: {expression}*
 
-loop: JMP_FWD expression* JMP_BCK
+{loop}: JMP_FWD {expression}* JMP_BCK
 
-actions: PTR_DEC | PTR_INC | DATA_DEC | DATA_INC | IO_INPUT | IO_OUTPUT
+{actions}: PTR_DEC | PTR_INC | DATA_DEC | DATA_INC | IO_INPUT | IO_OUTPUT
 
-expression: actions | loop
+{expression}: {actions} | {loop}
 
 PTR_DEC: "{ptr_dec}"
 PTR_INC: "{ptr_inc}"
@@ -68,4 +73,8 @@ COMMENT.ignore: /[^{ignore_chars}]+/
            jmp_forward=SYM_JMP_FWD,
            jmp_backwards=SYM_JMP_BACKWARD,
            ignore_chars=IGNORE_REGEX,
+           program=SYM_PROGRAM,
+           expression=SYM_EXPRESSIONS,
+           loop=SYM_LOOP,
+           actions=SYM_ACTIONS
            )

@@ -8,6 +8,8 @@ Memory object implementation.  Provides memory bounds checking, as well as value
 """
 # Stdlib
 import argparse
+import hashlib
+import json
 import logging
 import sys
 
@@ -34,6 +36,12 @@ class Storage(object):
         self.min = MEMORY_MIN_VALUE
         self.max = MEMORY_MAX_VALUE
         self.mem = {i: 0x00 for i in range(self.n)}
+
+    @property
+    def state_hash(self):
+        s = json.dumps(self.mem, sort_keys=True)
+        ret = hashlib.md5(s.encode()).hexdigest()
+        return ret
 
     def __contains__(self, item):
         return item in self.mem

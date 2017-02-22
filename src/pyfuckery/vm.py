@@ -13,8 +13,19 @@ import logging
 import sys
 
 # Third Party Code
+from lark import Tree
 # Custom Code
 from pyfuckery.constants import DEFAULT_MEMORY_SIZE
+from pyfuckery.constants import SYM_DATA_DEC
+from pyfuckery.constants import SYM_DATA_INC
+from pyfuckery.constants import SYM_PTR_DEC
+from pyfuckery.constants import SYM_PTR_INC
+from pyfuckery.constants import SYM_IO_INPUT
+from pyfuckery.constants import SYM_IO_OUTPUT
+from pyfuckery.constants import SYM_LOOP
+from pyfuckery.constants import SYM_ACTIONS
+from pyfuckery.constants import SYM_PROGRAM
+from pyfuckery.constants import SYM_EXPRESSIONS
 from pyfuckery.exc import VMError
 from pyfuckery.memory import Storage
 
@@ -26,8 +37,20 @@ class VirtualMachine(object):
         self.data_pointer = 0
         self._memory_size = memory_size
         self.memory = Storage(n=memory_size)
+        self.loop_detection = True
         self.stream_in = sys.stdin
         self.stream_out = sys.stdout
+        self.sym2func = {SYM_DATA_DEC: self.dec_data_value,
+                         SYM_DATA_INC: self.inc_data_value,
+                         SYM_IO_INPUT: self.io_input,
+                         SYM_IO_OUTPUT: self.io_output,
+                         SYM_PTR_DEC: self.dec_data_ptr,
+                         SYM_PTR_INC: self.inc_data_ptr,
+                         }
+
+    @property
+    def current_value(self):
+        return self.memory.get(self.data_pointer)
 
     def inc_data_ptr(self):
         temp = self.data_pointer + 1
@@ -64,6 +87,34 @@ class VirtualMachine(object):
     def io_input(self):
         raise NotImplementedError('Input not implmented yet.')
 
+    def run(self, tree: Tree):
+        # XXX This is a manual tree parsing.  Can we do better with a lark Transformer?
+        if tree.data == SYM_PROGRAM:
+            log.debug('Program entry point.')
+            for t in tree.children:
+                self.run(t)
+            return
+        if tree.data == SYM_ACTIONS:
+            token = tree.children[0]
+            func = self.sym2func.get(token)
+            func()
+            return
+        if tree.data == SYM_EXPRESSIONS:
+            for i, t in enumerate(tree.children):
+                # log.debug('Executing command #{} - {}'.format(i, repr(t)))
+                self.run(tree=t)
+            return
+        if tree.data == SYM_LOOP:
+            sh = self.memory.state_hash
+            while self.current_value != 0:
+                for t in tree.children:
+                    if isinstance(t, Tree):
+                        self.run(tree=t)
+                if self.loop_detection and self.memory.state_hash == sh:
+                    raise VMError('Infinite loop detected - no change in memory during loop execution!')
+                sh = self.memory.state_hash
+            return
+        raise NotImplementedError('Unknown tree type seen: {}'.format(tree.data))  # pragma: no cover
 
 # noinspection PyMissingOrEmptyDocstring
 def main(options):  # pragma: no cover
