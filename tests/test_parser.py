@@ -10,8 +10,6 @@ import logging
 import os
 
 import lark
-# Third party code
-import pytest
 
 # Custom code
 from fuckery import parser

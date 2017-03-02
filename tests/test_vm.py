@@ -150,6 +150,7 @@ class TestVm:
         # XXX This raises a TypeError with ord....which is probably better handled somehow as a EOL character.
         # test_vm.io_input()
 
+
 class TestExecution:
 
     def test_add(self, test_vm: VirtualMachine):

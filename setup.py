@@ -73,7 +73,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'fuckery = fuckery.cli:main',
+            'fuckery = fuckery.cli:_main',
         ]
     },
 )
