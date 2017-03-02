@@ -184,14 +184,9 @@ class TestExecution:
         r = test_vm.stream_out.read()
         assert r == 'Hello World!\n'
 
-    # XXX Write a bf program which runs a real infinite loop?
-    @pytest.mark.skip(reason='This test was originally designed for testing infinit loop detection, but the loop '
-                             'detection logic was made more accurate so it is no longer working.')
-    def test_comment_failure(self, test_vm: VirtualMachine):
-        fn = 'hello_world.bf'
-        buf = get_fn_contents(fn=fn)
-        bf = buf.decode()
-        tree = parse_program(s=bf)
+    def test_loop_detection(self, test_vm: VirtualMachine):
+        s = '+[+-]'
+        tree = parse_program(s=s)
         test_vm.loop_detection = True
         with pytest.raises(VMError) as cm:
             test_vm.run(tree)
