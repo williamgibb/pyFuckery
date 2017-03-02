@@ -77,7 +77,7 @@ Installation
 
 ::
 
-    pip install pyfuckery
+    pip install fuckery
 
 Documentation
 =============
