@@ -12,12 +12,11 @@ import argparse
 import logging
 import sys
 
+# Custom Code
+from fuckery.constants import GRAMMER
 # Third Party Code
 from lark import Lark
 from lark import Tree
-
-# Custom Code
-from pyfuckery.constants import GRAMMER
 
 log = logging.getLogger(__name__)
 

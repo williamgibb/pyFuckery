@@ -3,7 +3,7 @@ pyfuckery
 
 .. testsetup::
 
-    from pyfuckery import *
+    from fuckery import *
 
-.. automodule:: pyfuckery
+.. automodule:: fuckery
     :members:

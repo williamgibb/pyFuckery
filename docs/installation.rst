@@ -4,4 +4,4 @@ Installation
 
 At the command line::
 
-    pip install pyfuckery
+    pip install fuckery

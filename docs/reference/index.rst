@@ -4,4 +4,4 @@ Reference
 .. toctree::
     :glob:
 
-    pyfuckery*
+    fuckery*

@@ -1,5 +1,5 @@
 export PYTHONPATH=./src
-MODULE=pyfuckery
+MODULE=fuckery
 HTML_DIR=./htmlcov
 INDEX=$HTML_DIR/index.html
 

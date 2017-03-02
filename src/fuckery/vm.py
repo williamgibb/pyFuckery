@@ -13,24 +13,23 @@ import hashlib
 import logging
 import sys
 
+# Custom Code
+from fuckery.constants import DEFAULT_MEMORY_SIZE
+from fuckery.constants import SYM_ACTIONS
+from fuckery.constants import SYM_DATA_DEC
+from fuckery.constants import SYM_DATA_INC
+from fuckery.constants import SYM_EXPRESSIONS
+from fuckery.constants import SYM_IO_INPUT
+from fuckery.constants import SYM_IO_OUTPUT
+from fuckery.constants import SYM_LOOP
+from fuckery.constants import SYM_PROGRAM
+from fuckery.constants import SYM_PTR_DEC
+from fuckery.constants import SYM_PTR_INC
+from fuckery.exc import VMError
+from fuckery.memory import Storage
+from fuckery.parser import parse_program
 # Third Party Code
 from lark import Tree
-
-# Custom Code
-from pyfuckery.constants import DEFAULT_MEMORY_SIZE
-from pyfuckery.constants import SYM_ACTIONS
-from pyfuckery.constants import SYM_DATA_DEC
-from pyfuckery.constants import SYM_DATA_INC
-from pyfuckery.constants import SYM_EXPRESSIONS
-from pyfuckery.constants import SYM_IO_INPUT
-from pyfuckery.constants import SYM_IO_OUTPUT
-from pyfuckery.constants import SYM_LOOP
-from pyfuckery.constants import SYM_PROGRAM
-from pyfuckery.constants import SYM_PTR_DEC
-from pyfuckery.constants import SYM_PTR_INC
-from pyfuckery.exc import VMError
-from pyfuckery.memory import Storage
-from pyfuckery.parser import parse_program
 
 log = logging.getLogger(__name__)
 

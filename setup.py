@@ -23,7 +23,7 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='pyfuckery',
+    name='fuckery',
     version='0.1.0',
     license='BSD',
     description='Python Brainfuck implemention.',
@@ -73,7 +73,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'pyfuckery = pyfuckery.cli:main',
+            'fuckery = fuckery.cli:main',
         ]
     },
 )
