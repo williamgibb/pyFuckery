@@ -45,9 +45,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/pyfuckery
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/williamgibb/pyFuckery/v0.2.0.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/williamgibb/pyFuckery/v0.2.1.svg
     :alt: Commits since latest release
-    :target: https://github.com/williamgibb/pyFuckery/compare/v0.2.0...master
+    :target: https://github.com/williamgibb/pyFuckery/compare/v0.2.1...master
 
 .. |downloads| image:: https://img.shields.io/pypi/dm/pyfuckery.svg
     :alt: PyPI Package monthly downloads

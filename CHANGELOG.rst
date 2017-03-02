@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.1 (2017-03-01)
+-----------------------------------------
+* Fix issue with wheel's and trove classifiers on pypi.
+
 0.2.0 (2017-03-01)
 -----------------------------------------
 * Working brainfuck interpreter available.
