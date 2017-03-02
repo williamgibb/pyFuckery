@@ -14,4 +14,6 @@ def test_main():
     ns = argparse.Namespace()
     ns.verbose = False
     ns.input = fp
+    ns.loop_detection = False
+    ns.memory_size = 100
     main(options=ns)

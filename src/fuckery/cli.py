@@ -18,6 +18,7 @@ import argparse
 import logging
 import os
 
+from fuckery.constants import DEFAULT_MEMORY_SIZE
 from fuckery.exc import ExitCondition
 from fuckery.parser import parse_program
 from fuckery.vm import VirtualMachine
@@ -36,7 +37,8 @@ def main(options):
     s = buf.decode()
     tree = parse_program(s=s)
     log.info('Executing {}'.format(os.path.basename(bn)))
-    vm = VirtualMachine()
+    vm = VirtualMachine(memory_size=options.memory_size,
+                        loop_detection=options.loop_detection)
     try:
         vm.run(tree=tree)
     except ExitCondition as e:
@@ -48,6 +50,10 @@ def makeargpaser():  # pragma: no cover
     parser = argparse.ArgumentParser(description='Execute a brainfuck program.')
     parser.add_argument('-i', '--input', dest='input', action='store', type=str, required=True,
                         help='.bf file to execute.')
+    parser.add_argument('--loop-detection', dest='loop_detection', default=False, action='store_true',
+                        help='Enable loop detection (this has a significant performance impact with large memory).')
+    parser.add_argument('--memory-size', dest='memory_size', default=DEFAULT_MEMORY_SIZE, type=int, action='store',
+                        help='Memory size to use.  If set too low, programs may fail to run.')
     parser.add_argument('-v', '--verbose', dest='verbose', default=False, action='store_true',
                         help='Enable verbose output.')
     return parser
@@ -58,4 +64,5 @@ def _main():  # pragma: no cover
                         format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')
     p = makeargpaser()
     opts = p.parse_args()
+    print(opts)
     main(opts)
