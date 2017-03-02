@@ -30,3 +30,8 @@ class VMError(FuckeryError):
     """
     Error related to the brainfuck VM
     """
+
+class ExitCondition(VMError):
+    """
+    Error raised during a exit condition.
+    """

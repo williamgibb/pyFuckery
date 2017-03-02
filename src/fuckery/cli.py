@@ -18,6 +18,7 @@ import argparse
 import logging
 import os
 
+from fuckery.exc import ExitCondition
 from fuckery.parser import parse_program
 from fuckery.vm import VirtualMachine
 
@@ -36,13 +37,16 @@ def main(options):
     tree = parse_program(s=s)
     log.info('Executing {}'.format(os.path.basename(bn)))
     vm = VirtualMachine()
-    vm.run(tree=tree)
+    try:
+        vm.run(tree=tree)
+    except ExitCondition as e:
+        log.info(e)
     log.info('Done running program.')
 
 
 def makeargpaser():  # pragma: no cover
     parser = argparse.ArgumentParser(description='Execute a brainfuck program.')
-    parser.add_argument('-i', '--input', dest='File to execute.', action='store', type=str, required=True,
+    parser.add_argument('-i', '--input', dest='input', action='store', type=str, required=True,
                         help='.bf file to execute.')
     parser.add_argument('-v', '--verbose', dest='verbose', default=False, action='store_true',
                         help='Enable verbose output.')

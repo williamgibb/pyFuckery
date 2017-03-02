@@ -25,6 +25,7 @@ from fuckery.constants import SYM_LOOP
 from fuckery.constants import SYM_PROGRAM
 from fuckery.constants import SYM_PTR_DEC
 from fuckery.constants import SYM_PTR_INC
+from fuckery.exc import ExitCondition
 from fuckery.exc import VMError
 from fuckery.memory import Storage
 from fuckery.parser import parse_program
@@ -98,13 +99,20 @@ class VirtualMachine(object):
 
         :return:
         """
-        if self.stream_in is sys.stdin:  # pragma: no cover
-            v = input('>')
-            v = v[0]
+        self.memory.set(addr=self.data_pointer, value=0)
+        try:
+            if self.stream_in is sys.stdin:  # pragma: no cover
+                v = input('>')
+                v = v[0]
+            else:
+                v = self.stream_in.read(1)
+            v = ord(v)
+        except (TypeError, IndexError):
+            return
+        except KeyboardInterrupt:
+            raise ExitCondition('Keyboard error - exiting.')
         else:
-            v = self.stream_in.read(1)
-        v = ord(v)
-        self.memory.set(addr=self.data_pointer, value=v)
+            self.memory.set(addr=self.data_pointer, value=v)
 
     def run(self, tree: Tree):
         # XXX This is a manual tree parsing.  Can we do better with a lark Transformer?
