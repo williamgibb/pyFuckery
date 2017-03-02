@@ -41,29 +41,29 @@ Overview
     :target: https://landscape.io/github/williamgibb/pyFuckery/master
     :alt: Code Quality Status
 
-.. |version| image:: https://img.shields.io/pypi/v/pyfuckery.svg
+.. |version| image:: https://img.shields.io/pypi/v/fuckery.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/pyfuckery
+    :target: https://pypi.python.org/pypi/fuckery
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/williamgibb/pyFuckery/v0.2.1.svg
     :alt: Commits since latest release
     :target: https://github.com/williamgibb/pyFuckery/compare/v0.2.1...master
 
-.. |downloads| image:: https://img.shields.io/pypi/dm/pyfuckery.svg
+.. |downloads| image:: https://img.shields.io/pypi/dm/fuckery.svg
     :alt: PyPI Package monthly downloads
-    :target: https://pypi.python.org/pypi/pyfuckery
+    :target: https://pypi.python.org/pypi/fuckery
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/pyfuckery.svg
+.. |wheel| image:: https://img.shields.io/pypi/wheel/fuckery.svg
     :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/pyfuckery
+    :target: https://pypi.python.org/pypi/fuckery
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/pyfuckery.svg
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/ fuckery.svg
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/pyfuckery
+    :target: https://pypi.python.org/pypi/fuckery
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/pyfuckery.svg
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/fuckery.svg
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/pyfuckery
+    :target: https://pypi.python.org/pypi/fuckery
 
 
 .. end-badges
