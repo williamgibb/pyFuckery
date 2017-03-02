@@ -17,8 +17,8 @@ Overview
       - | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
 
-.. |docs| image:: https://readthedocs.org/projects/pyFuckery/badge/?style=flat
-    :target: https://readthedocs.org/projects/pyFuckery
+.. |docs| image:: https://readthedocs.org/projects/pyfuckery/badge/?style=flat
+    :target: https://readthedocs.org/projects/pyfuckery
     :alt: Documentation Status
 
 .. |travis| image:: https://travis-ci.org/williamgibb/pyFuckery.svg?branch=master
