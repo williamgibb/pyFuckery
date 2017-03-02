@@ -38,7 +38,7 @@ class Storage(object):
         self.mem = {i: 0x00 for i in range(self.n)}
 
     @property
-    def state_hash(self):
+    def mem_hash(self):
         s = json.dumps(self.mem, sort_keys=True)
         ret = hashlib.md5(s.encode()).hexdigest()
         return ret

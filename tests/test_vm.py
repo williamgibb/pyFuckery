@@ -137,7 +137,8 @@ class TestVm:
         assert test_vm.data_pointer != current_v
         assert test_vm.data_pointer < current_v
 
-class TestExection:
+
+class TestExecution:
 
     def test_add(self, test_vm: VirtualMachine):
         # The add.bf program won't do anything since the loop will not be entered.
@@ -145,24 +146,47 @@ class TestExection:
         buf = get_fn_contents(fn=fn)
         bf = buf.decode()
         tree = parse_program(s=bf)
-        test_vm.stream_out = io.BytesIO()
-        sh = test_vm.memory.state_hash
+        test_vm.stream_out = io.StringIO()
+        sh = test_vm.memory.mem_hash
         test_vm.run(tree)
-        assert test_vm.memory.state_hash == sh
+        assert test_vm.memory.mem_hash == sh
 
     def test_hello_world(self, test_vm: VirtualMachine):
         fn = 'hello_world.bf'
         buf = get_fn_contents(fn=fn)
         bf = buf.decode()
         tree = parse_program(s=bf)
-        test_vm.stream_out = io.BytesIO()
-        # Disable loop detection.  This is required since the hello_world.bf has a comment in the header.
-        test_vm.loop_detection = False
+        test_vm.stream_out = io.StringIO()
         test_vm.run(tree)
         test_vm.stream_out.seek(0)
         r = test_vm.stream_out.read()
-        assert r == 'Hello World!\n'.encode('ascii')
+        assert r == 'Hello World!\n'
 
+    def test_minimal_hello_world(self, test_vm: VirtualMachine):
+        # Minimal hello world from wikipedia
+        s = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
+        tree = parse_program(s=s)
+        test_vm.stream_out = io.StringIO()
+        test_vm.run(tree)
+        test_vm.stream_out.seek(0)
+        r = test_vm.stream_out.read()
+        assert r == 'Hello World!\n'
+
+    def test_minimal_hello_world_loop_detection(self, test_vm: VirtualMachine):
+        # Minimal hello world from wikipedia
+        s = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
+        tree = parse_program(s=s)
+        test_vm.stream_out = io.StringIO()
+        # Enable loop detection.  This increases runtime at the expense of checking for infinite loops.
+        test_vm.loop_detection = True
+        test_vm.run(tree)
+        test_vm.stream_out.seek(0)
+        r = test_vm.stream_out.read()
+        assert r == 'Hello World!\n'
+
+    # XXX Write a bf program which runs a real infinite loop?
+    @pytest.mark.skip(reason='This test was originally designed for testing infinit loop detection, but the loop '
+                             'detection logic was made more accurate so it is no longer working.')
     def test_comment_failure(self, test_vm: VirtualMachine):
         fn = 'hello_world.bf'
         buf = get_fn_contents(fn=fn)
