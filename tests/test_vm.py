@@ -137,6 +137,18 @@ class TestVm:
         assert test_vm.data_pointer != current_v
         assert test_vm.data_pointer < current_v
 
+    def test_input_stream(self, test_vm: VirtualMachine):
+        stream_in = io.StringIO('Hello World!\n')
+        test_vm.stream_in = stream_in
+
+        test_vm.io_input()
+        assert test_vm.current_value == ord('H')
+        for c in 'ello World!\n':
+            test_vm.io_input()
+            assert test_vm.current_value == ord(c)
+
+        # XXX This raises a TypeError with ord....which is probably better handled somehow as a EOL character.
+        # test_vm.io_input()
 
 class TestExecution:
 

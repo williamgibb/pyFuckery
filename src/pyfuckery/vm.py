@@ -95,7 +95,17 @@ class VirtualMachine(object):
 
     # XXX Finish IO handlings
     def io_input(self):
-        raise NotImplementedError('Input not implmented yet.')
+        """
+
+        :return:
+        """
+        if self.stream_in is sys.stdin:  # pragma: no cover
+            v = input('>')
+            v = v[0]
+        else:
+            v = self.stream_in.read(1)
+        v = ord(v)
+        self.memory.set(addr=self.data_pointer, value=v)
 
     def run(self, tree: Tree):
         # XXX This is a manual tree parsing.  Can we do better with a lark Transformer?
