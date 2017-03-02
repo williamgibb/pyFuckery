@@ -14,7 +14,7 @@ import lark
 import pytest
 
 # Custom code
-from pyfuckery import parser
+from fuckery import parser
 
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')

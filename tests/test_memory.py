@@ -12,10 +12,10 @@ import logging
 # Third party code
 import pytest
 
-from pyfuckery import memory
+from fuckery import memory
 # Custom code
-from pyfuckery.exc import AddressError
-from pyfuckery.exc import StorageError
+from fuckery.exc import AddressError
+from fuckery.exc import StorageError
 
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')

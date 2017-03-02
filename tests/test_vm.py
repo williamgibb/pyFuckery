@@ -14,9 +14,9 @@ import os
 import pytest
 
 # Custom code
-from pyfuckery.exc import VMError
-from pyfuckery.parser import parse_program
-from pyfuckery.vm import VirtualMachine
+from fuckery.exc import VMError
+from fuckery.parser import parse_program
+from fuckery.vm import VirtualMachine
 
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')

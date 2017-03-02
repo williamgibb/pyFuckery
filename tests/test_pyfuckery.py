@@ -1,5 +1,5 @@
 
-from pyfuckery.cli import main
+from fuckery.cli import main
 
 
 def test_main():

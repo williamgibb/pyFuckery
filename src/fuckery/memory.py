@@ -15,11 +15,11 @@ import sys
 
 # Third Party Code
 # Custom Code
-from pyfuckery.constants import DEFAULT_MEMORY_SIZE
-from pyfuckery.constants import MEMORY_MAX_VALUE
-from pyfuckery.constants import MEMORY_MIN_VALUE
-from pyfuckery.exc import AddressError
-from pyfuckery.exc import StorageError
+from fuckery.constants import DEFAULT_MEMORY_SIZE
+from fuckery.constants import MEMORY_MAX_VALUE
+from fuckery.constants import MEMORY_MIN_VALUE
+from fuckery.exc import AddressError
+from fuckery.exc import StorageError
 
 log = logging.getLogger(__name__)
 
