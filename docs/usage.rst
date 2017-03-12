@@ -2,6 +2,22 @@
 Usage
 =====
 
-To use pyFuckery in a project::
+To use pyFuckery in a project simply import the package, instantiate a VM and execute your brainfuck program::
 
 	import fuckery
+	vm = fuckery.VirtualMachine()
+	program = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
+	vm.parse_and_run(program)
+
+You can also swap out the input / output streams used by the VM, if stdin / stderr are not appropraite for your application::
+
+	import fuckery
+	import io
+	outstream = io.StringIO()
+	vm = fuckery.VirtualMachine()
+	vm.stream_out = outstream
+	program = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
+	vm.parse_and_run(program)
+	vm.out_stream.seek(0)
+	print(vm.out_stream.read())
+
