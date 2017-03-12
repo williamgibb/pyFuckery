@@ -9,7 +9,7 @@ To use pyFuckery in a project simply import the package, instantiate a VM and ex
 	program = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
 	vm.parse_and_run(program)
 
-You can also swap out the input / output streams used by the VM, if stdin / stderr are not appropraite for your application::
+You can also swap out the input / output streams used by the VM, if stdin / stderr are not appropriate for your application::
 
 	import fuckery
 	import io
