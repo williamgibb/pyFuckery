@@ -146,6 +146,16 @@ class VirtualMachine(object):
             return
         raise NotImplementedError('Unknown tree type seen: {}'.format(tree.data))  # pragma: no cover
 
+    def parse_and_run(self, program: str) -> None:
+        """
+        Parse and run a brainfuck program.
+
+        :param program: String representing a brainfuck program.
+        :return: None
+        """
+        t = parse_program(s=program)
+        self.run(tree=t)
+
 
 # noinspection PyMissingOrEmptyDocstring
 def main(options):  # pragma: no cover

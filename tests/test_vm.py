@@ -204,3 +204,12 @@ class TestExecution:
         with pytest.raises(VMError) as cm:
             test_vm.run(tree)
         assert 'Infinite loop detected - no change in memory during loop execution!' in str(cm.value)
+
+    def test_parse_and_run(self, test_vm: VirtualMachine):
+        # Minimal hello world from wikipedia
+        s = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
+        test_vm.stream_out = io.StringIO()
+        test_vm.parse_and_run(program=s)
+        test_vm.stream_out.seek(0)
+        r = test_vm.stream_out.read()
+        assert r == 'Hello World!\n'
