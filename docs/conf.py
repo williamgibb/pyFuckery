@@ -22,7 +22,7 @@ if os.getenv('SPELLCHECK'):
 
 source_suffix = '.rst'
 master_doc = 'index'
-project = 'pyfuckery'
+project = 'fuckery'
 year = '2017'
 author = 'William Gibb'
 copyright = '{0}, {1}'.format(year, author)
