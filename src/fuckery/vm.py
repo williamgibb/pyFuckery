@@ -36,9 +36,12 @@ log = logging.getLogger(__name__)
 
 
 class VirtualMachine(object):
+    """
+    Docstrings are hard.
+    """
     def __init__(self,
-                 memory_size: int =DEFAULT_MEMORY_SIZE,
-                 loop_detection: bool =False,
+                 memory_size: int = DEFAULT_MEMORY_SIZE,
+                 loop_detection: bool = False,
                  *args,
                  **kwargs):
         """
@@ -56,13 +59,14 @@ class VirtualMachine(object):
         self.loop_detection = loop_detection
         self.stream_in = sys.stdin
         self.stream_out = sys.stdout
-        self.sym2func = {SYM_DATA_DEC: self.dec_data_value,
-                         SYM_DATA_INC: self.inc_data_value,
-                         SYM_IO_INPUT: self.io_input,
-                         SYM_IO_OUTPUT: self.io_output,
-                         SYM_PTR_DEC: self.dec_data_ptr,
-                         SYM_PTR_INC: self.inc_data_ptr,
-                         }
+        self.sym2func = {
+            SYM_DATA_DEC: self.dec_data_value,
+            SYM_DATA_INC: self.inc_data_value,
+            SYM_IO_INPUT: self.io_input,
+            SYM_IO_OUTPUT: self.io_output,
+            SYM_PTR_DEC: self.dec_data_ptr,
+            SYM_PTR_INC: self.inc_data_ptr,
+            }
 
     @property
     def current_value(self) -> int:
