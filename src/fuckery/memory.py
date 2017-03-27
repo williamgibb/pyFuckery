@@ -32,6 +32,11 @@ class Storage(object):
     """
 
     def __init__(self, n=DEFAULT_MEMORY_SIZE):
+        """
+        Init function for Storage.
+
+        :param n: Number of memory cells to create.
+        """
         self.n = n
         self.min = MEMORY_MIN_VALUE
         self.max = MEMORY_MAX_VALUE
@@ -39,6 +44,14 @@ class Storage(object):
 
     @property
     def mem_hash(self):
+        """
+        Returns a hash of the state of the memory.
+
+        Note - Computing this frequently can be expensive to do as the memory section is
+        serialized via json.dumps() prior to hashing.
+
+        :return:
+        """
         s = json.dumps(self.mem, sort_keys=True)
         ret = hashlib.md5(s.encode()).hexdigest()
         return ret
@@ -50,11 +63,24 @@ class Storage(object):
         return len(self.mem)
 
     def get(self, addr):
+        """
+        Get the value of the memory at a location.
+
+        :param addr: Memory address to retrieve.
+        :return:
+        """
         if addr not in self:
             raise AddressError('Address is invalid: {}'.format(addr))
         return self.mem.get(addr)
 
     def set(self, addr, value):
+        """
+        Set the value of the memory at a locaiton.
+
+        :param addr: Memory address to set.
+        :param value: Value to set.
+        :return:
+        """
         if addr not in self:
             raise AddressError('Address is invalid: {}'.format(addr))
         if not isinstance(value, int):

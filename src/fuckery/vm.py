@@ -37,21 +37,18 @@ log = logging.getLogger(__name__)
 
 class VirtualMachine(object):
     """
-    Docstrings are hard.
+    This is the brainfuck VM.  You can drop this into programs that need a brainfuck VM, such as a module you don't
+    want a coworker to ever easily maintain, or a really cruel programming based game.
     """
     def __init__(self,
                  memory_size: int = DEFAULT_MEMORY_SIZE,
-                 loop_detection: bool = False,
-                 *args,
-                 **kwargs):
+                 loop_detection: bool = False):
         """
         Init function for the VM.
 
         :param memory_size: Number of memory cells to instantiate.
         :param loop_detection: Enables loop detection if this evaluates to True.  This is very costly from a
         computation perspective, so use it wisely.
-        :param args:
-        :param kwargs:
         """
         self.data_pointer = 0
         self._memory_size = memory_size

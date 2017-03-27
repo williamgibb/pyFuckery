@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# XXX Update Docstring
 """
 pyFuckery - constants.py
 Created on 2/12/17.
 
-
+Constants used by fuckery.
 """
 # Stdlib
 
