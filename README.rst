@@ -29,6 +29,10 @@ Overview
     :alt: AppVeyor Build Status
     :target: https://ci.appveyor.com/project/williamgibb/pyFuckery
 
+.. |cricleci| image:: https://circleci.com/gh/williamgibb/pyFuckery.svg?style=svg
+    :alt: CircleCI Build Status
+    :target: https://circleci.com/gh/williamgibb/pyFuckery
+
 .. |requires| image:: https://requires.io/github/williamgibb/pyFuckery/requirements.svg?branch=master
     :alt: Requirements Status
     :target: https://requires.io/github/williamgibb/pyFuckery/requirements/?branch=master
