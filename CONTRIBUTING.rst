@@ -17,8 +17,8 @@ When `reporting a bug <https://github.com/williamgibb/pyFuckery/issues>`_ please
 Documentation improvements
 ==========================
 
-pyFuckery could always use more documentation, whether as part of the
-official pyFuckery docs, in docstrings, or even on the web in blog posts,
+fuckery could always use more documentation, whether as part of the
+official fuckery docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Feature requests and feedback
@@ -35,7 +35,7 @@ If you are proposing a feature:
 Development
 ===========
 
-To set up `pyFuckery` for local development:
+To set up `fuckery` for local development:
 
 1. Fork `pyFuckery <https://github.com/williamgibb/pyFuckery>`_
    (look for the "Fork" button).
@@ -84,6 +84,10 @@ Tips
 To run a subset of tests::
 
     tox -e envname -- py.test -k test_myfeature
+
+To run a specific test, with coverage reporting, you can also use the packaged testrunner.sh script.
+
+    ./testrunner.sh test_myfeature
 
 To run all the test environments in *parallel* (you need to ``pip install detox``)::
 
