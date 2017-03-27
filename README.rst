@@ -10,7 +10,7 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |appveyor| |requires|
+      - | |travis| |appveyor| |circleci| |requires|
         | |codecov|
         | |landscape|
     * - package
@@ -28,6 +28,10 @@ Overview
 .. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/williamgibb/pyFuckery?branch=master&svg=true
     :alt: AppVeyor Build Status
     :target: https://ci.appveyor.com/project/williamgibb/pyFuckery
+
+.. |circleci| image:: https://circleci.com/gh/williamgibb/pyFuckery.svg?style=svg
+    :alt: CircleCI Build Status
+    :target: https://circleci.com/gh/williamgibb/pyFuckery
 
 .. |requires| image:: https://requires.io/github/williamgibb/pyFuckery/requirements.svg?branch=master
     :alt: Requirements Status
