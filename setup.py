@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='fuckery',
-    version='0.2.2',
+    version='0.2.3',
     license='BSD',
     description='Python Brainfuck implemention.',
     long_description='%s\n%s' % (
