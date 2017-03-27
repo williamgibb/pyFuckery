@@ -1,5 +1,5 @@
-pyfuckery
-=========
+fuckery
+=======
 
 .. testsetup::
 
