@@ -6,17 +6,22 @@ Created on 2/12/17.
 
 Constants used by fuckery.
 """
-# Stdlib
-
-
-# Brainfuck tokens
+#: Brainfuck tokens
+#: Brainfuck PTR INC token
 SYM_PTR_INC = '>'
+#: Brainfuck PTR DEC token
 SYM_PTR_DEC = '<'
+#: Brainfuck DATA INC token
 SYM_DATA_INC = '+'
+#: Brainfuck DATA INC token
 SYM_DATA_DEC = '-'
+#: Brainfuck IO output token
 SYM_IO_OUTPUT = '.'
+#: Braifuck IO input token
 SYM_IO_INPUT = ','
+#: Brainfuck jump forward token
 SYM_JMP_FWD = '['
+#: Brainfuck jump backward token
 SYM_JMP_BACKWARD = ']'
 
 SYM_PROGRAM = 'program'
@@ -25,6 +30,7 @@ SYM_ACTIONS = 'actions'
 SYM_EXPRESSIONS = 'expression'
 
 # Default VM configuration
+#: Default memotry sizen
 DEFAULT_MEMORY_SIZE = 30000
 MEMORY_MIN_VALUE = 0
 MEMORY_MAX_VALUE = 255

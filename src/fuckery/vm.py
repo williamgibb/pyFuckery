@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# XXX Update Docstring
 """
 pyFuckery - vm.py
 Created on 2/12/17.
 
-
+VM Defiition to execute brainfuck programs which have been parsed into lark.Tree objects.
 """
 # Stdlib
 import argparse
