@@ -2,4 +2,4 @@
 Authors
 =======
 
-* William Gibb - https://github.com/williamgibb/pyFuckery
+* William Gibb - https://github.com/williamgibb/
