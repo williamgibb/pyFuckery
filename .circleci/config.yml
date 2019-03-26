@@ -153,6 +153,7 @@ jobs:
             - run:
                   name: verify git tag vs. version
                   command: |
+                      env | grep -i circle
                       . venv/bin/activate
                       python setup.py verify
             - run:
