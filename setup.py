@@ -5,6 +5,7 @@ from __future__ import print_function
 
 import io
 import re
+import sys
 from glob import glob
 from os.path import basename
 from os.path import dirname
@@ -13,7 +14,10 @@ from os.path import splitext
 
 from setuptools import find_packages
 from setuptools import setup
+from setuptools.command.install import install
 
+
+VERSION = '0.2.3'
 
 def read(*names, **kwargs):
     return io.open(
@@ -22,9 +26,22 @@ def read(*names, **kwargs):
     ).read()
 
 
+class VerifyVersionCommand(install):
+    """Custom command to verify that the git tag matches our version"""
+    description = 'verify that the git tag matches our version'
+
+    def run(self):
+        tag = os.getenv('CIRCLE_TAG')
+
+        if tag != VERSION:
+            info = "Git tag: {0} does not match the version of this app: {1}".format(
+                tag, VERSION
+            )
+            sys.exit(info)
+
 setup(
     name='fuckery',
-    version='0.2.3',
+    version=VERSION,
     license='BSD',
     description='Python Brainfuck implemention.',
     long_description='%s\n%s' % (
