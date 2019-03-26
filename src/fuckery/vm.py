@@ -4,7 +4,7 @@
 pyFuckery - vm.py
 Created on 2/12/17.
 
-VM Defiition to execute brainfuck programs which have been parsed into lark.Tree objects.
+VM Definition to execute brainfuck programs which have been parsed into lark.Tree objects.
 """
 # Stdlib
 import argparse
