@@ -186,7 +186,7 @@ workflows:
                       branches:
                           only: /.*/
 
-            - python37
+            - python37:
                   filters:
                       tags:
                           only: /.*/
