@@ -112,7 +112,7 @@ jobs:
                   name: verify git tag vs. version
                   command: |
                       . venv/bin/activate
-#                      python setup.py verify
+                      python setup.py verify
             - run:
                   name: init .pypirc
                   command: |
@@ -124,12 +124,12 @@ jobs:
                   command: |
                       . venv/bin/activate
                       python setup.py sdist bdist_wheel
-                      ls -ltha dist
+
             - run:
                   name: upload to pypi
                   command: |
                       . venv/bin/activate
-                      # twine upload dist/*
+                      twine upload dist/*
 
 
 workflows:
@@ -145,6 +145,14 @@ workflows:
                   filters:
                       branches:
                           only:
-                              - master
+                              - tags
+            - build_containers:
+                  requires:
+                      - python36
+                      - python37
+                  filters:
+                      branches:
+                          only:
                               - circleci_fix
+                              - master
                               - tags
