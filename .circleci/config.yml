@@ -86,12 +86,12 @@ jobs:
 
     build_packages:
         docker:
-            - image: circleci/python:3.6
+            - image: circleci/python:3.7
         steps:
             - checkout
 
             - restore_cache:
-                  key:
+                  keys:
                       - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
@@ -104,9 +104,9 @@ jobs:
                       pytohn -m pip install -U -r src/fuckery.egg-info/requires.txt
 
             - save_cache:
-              paths:
-                  - ./venv
-              key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                paths:
+                    - ./venv
+                key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
                   name: verify git tag vs. version
