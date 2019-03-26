@@ -84,6 +84,17 @@ jobs:
 
         <<: *test_steps
 
+    build_containers:
+        docker:
+            - image: docker:18.05.0-ce
+        steps:
+            - checkout
+            - setup_remote_docker
+            - run:
+                  name: build image
+                  command: |
+                      docker buid -t fuckery:dev -f Dockerfile .
+
     build_packages:
         docker:
             - image: circleci/python:3.7
