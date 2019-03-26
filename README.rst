@@ -10,7 +10,7 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |appveyor| |circleci| |requires|
+      - | |appveyor| |circleci| |requires|
         | |codecov|
         | |landscape|
     * - package
@@ -20,10 +20,6 @@ Overview
 .. |docs| image:: https://readthedocs.org/projects/pyfuckery/badge/?style=flat
     :target: https://readthedocs.org/projects/pyfuckery
     :alt: Documentation Status
-
-.. |travis| image:: https://travis-ci.org/williamgibb/pyFuckery.svg?branch=master
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/williamgibb/pyFuckery
 
 .. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/williamgibb/pyFuckery?branch=master&svg=true
     :alt: AppVeyor Build Status
