@@ -93,7 +93,7 @@ jobs:
             - run:
                   name: build image
                   command: |
-                      docker buid -t fuckery:dev -f Dockerfile .
+                      docker build -t fuckery:dev -f Dockerfile .
 
     build_packages:
         docker:
