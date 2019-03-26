@@ -185,9 +185,9 @@ workflows:
                       - python36
                       - python37
                   filters:
-                      branches:
-                          only:
-                              - tags
+                      tags:
+                          only: /^v.*/
+
             - build_container_branch:
                   requires:
                       - python36
@@ -195,13 +195,12 @@ workflows:
                   filters:
                       branches:
                           only:
-                              - circleci_fix
                               - master
+
             - build_container_tags:
                   requires:
                       - python36
                       - python37
                   filters:
-                      branches:
-                          only:
-                              - tags
+                      tags:
+                          only: /^v.*/
