@@ -2,10 +2,11 @@
 Changelog
 =========
 
-0.3.0-dev
+0.3.0 (2018-03-26)
 ----------------------------------------
 * Remove TravisCI build support.
-
+* Add CircleCI support for CI testing.
+* Add CircleCI support for PyPi publishing and Docker container building.
 
 0.2.3 (2017-03-27)
 ----------------------------------------
