@@ -94,6 +94,18 @@ jobs:
                   name: build image
                   command: |
                       docker build -t fuckery:dev -f Dockerfile .
+            - run:
+                  name: docker login
+                  command: |
+                      docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
+
+            - run:
+                  name: tag and push master
+                  command: |
+                      if [ "${CIRCLE_BRANCH}" == "master" ];
+                        docker image tag fuckery:dev williamgibb/fuckery:master
+                        docker push williamgibb/fuckery:master
+                      fi
 
     build_packages:
         docker:
