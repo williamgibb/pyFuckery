@@ -62,6 +62,7 @@ jobs:
         docker:
             - image: circleci/python:3.7
               environment:
+                  RUN_SYNTAX: 1
                   CODECOV_ARGS: --required
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail
                   PYVERS: 3.7
@@ -75,6 +76,7 @@ jobs:
         docker:
             - image: circleci/python:3.6
               environment:
+                  RUN_SYNTAX: 1
                   CODECOV_ARGS: --required
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail
                   PYVERS: 3.6
