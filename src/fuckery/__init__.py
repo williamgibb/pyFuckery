@@ -4,5 +4,5 @@ from fuckery import memory
 from fuckery import parser
 from fuckery import vm
 
-__version__ = "0.2.3"
+__version__ = "0.3.0"
 __all__ = ['constants', 'exc', 'memory', 'parser', 'vm']
