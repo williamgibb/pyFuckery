@@ -26,7 +26,7 @@ project = 'fuckery'
 year = '2017'
 author = 'William Gibb'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '0.3.6'
+version = release = '0.3.7'
 
 pygments_style = 'trac'
 templates_path = ['.']
