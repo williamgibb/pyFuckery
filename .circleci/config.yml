@@ -84,7 +84,7 @@ jobs:
 
         <<: *test_steps
 
-    build_containers:
+    build_container_branch:
         docker:
             - image: docker:18.05.0-ce
         steps:
@@ -103,6 +103,14 @@ jobs:
                   name: tag and push master
                   command: |
                       if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                        docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
+                        docker push williamgibb/fuckery:${CIRCLE_BRANCH}
+                      fi
+
+            - run:
+                  name: tag and push tagged images
+                  command: |
+                      if [ "${CRICLE_TAG}" == "master" ]; then
                         docker image tag fuckery:dev williamgibb/fuckery:master
                         docker push williamgibb/fuckery:master
                       fi
@@ -169,7 +177,7 @@ workflows:
                       branches:
                           only:
                               - tags
-            - build_containers:
+            - build_container_branch:
                   requires:
                       - python36
                       - python37
@@ -178,4 +186,3 @@ workflows:
                           only:
                               - circleci_fix
                               - master
-                              - tags
