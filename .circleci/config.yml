@@ -188,6 +188,8 @@ workflows:
                   filters:
                       tags:
                           only: /^v.*/
+                      branches:
+                          ignore: /.*/
 
             - build_container_branch:
                   requires:
@@ -205,3 +207,5 @@ workflows:
                   filters:
                       tags:
                           only: /^v.*/
+                      branches:
+                          ignore: /.*/
