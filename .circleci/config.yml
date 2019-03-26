@@ -141,7 +141,7 @@ jobs:
                   command: |
                       python3 -m venv venv
                       . venv/bin/activate
-                      python3 -m pip install -U wheel pip
+                      python3 -m pip install -U wheel pip twine
                       python setup.py egg_info
                       python -m pip install -U -r src/fuckery.egg-info/requires.txt
 
