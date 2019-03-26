@@ -100,20 +100,30 @@ jobs:
                       docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
 
             - run:
-                  name: tag and push master
+                  name: tag and push container
                   command: |
-                      if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                        docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
-                        docker push williamgibb/fuckery:${CIRCLE_BRANCH}
-                      fi
+                      docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
+                      docker push williamgibb/fuckery:${CIRCLE_BRANCH}
 
+    build_container_tags:
+        docker:
+            - image: docker:18.05.0-ce
+        steps:
+            - checkout
+            - setup_remote_docker
             - run:
-                  name: tag and push tagged images
+                  name: build image
                   command: |
-                      if [ "${CRICLE_TAG}" == "master" ]; then
-                        docker image tag fuckery:dev williamgibb/fuckery:master
-                        docker push williamgibb/fuckery:master
-                      fi
+                      docker build -t fuckery:dev -f Dockerfile .
+            - run:
+                  name: docker login
+                  command: |
+                      docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
+            - run:
+                  name: tag and push container
+                  command: |
+                      docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_TAG}
+                      docker push williamgibb/fuckery:${CIRCLE_TAG}
 
     build_packages:
         docker:
@@ -186,3 +196,10 @@ workflows:
                           only:
                               - circleci_fix
                               - master
+            - build_container_tags:
+                  requires:
+                      - python36
+                      - python37
+                  filters:
+                      tags:
+                          only: /^v.*/
