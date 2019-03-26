@@ -199,7 +199,7 @@ workflows:
                       - python37
                   filters:
                       tags:
-                          only: /^v.*/
+                          only: /^v([0-9.]+)$/
                       branches:
                           ignore: /.*/
 
@@ -218,6 +218,6 @@ workflows:
                       - python37
                   filters:
                       tags:
-                          only: /^v.*/
+                          only: /^v([0-9.]+)$/
                       branches:
                           ignore: /.*/
