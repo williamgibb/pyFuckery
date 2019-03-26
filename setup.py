@@ -89,4 +89,7 @@ setup(
             'fuckery = fuckery.cli:_main',
         ]
     },
+    cmdclass={
+        'verify': VerifyVersionCommand,
+    },
 )
