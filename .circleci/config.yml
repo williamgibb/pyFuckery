@@ -91,7 +91,8 @@ jobs:
             - checkout
 
             - restore_cache:
-                  key: - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                  key:
+                      - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
                   name: install python dependencies
