@@ -201,5 +201,6 @@ workflows:
                       - python36
                       - python37
                   filters:
-                      tags:
-                          only: /^v.*/
+                      branches:
+                          only:
+                              - tags
