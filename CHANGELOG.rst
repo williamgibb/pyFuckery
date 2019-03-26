@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.3.0-dev
+----------------------------------------
+* Remove TravisCI build support.
+
+
 0.2.3 (2017-03-27)
 ----------------------------------------
 * Add a parse_and_run() function to the VirtualMachine class, to allow it to execute arbitrary brainfuck programs.

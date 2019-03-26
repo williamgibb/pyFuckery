@@ -3,53 +3,205 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
+test_steps:  &test_steps
     steps:
-      - checkout
+        - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+        - restore_cache:
+              keys:
+                  - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
-      - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
+        - run:
+              name: setup venv
+              command: |
+                  python3 -m venv --copies venv
+                  . venv/bin/activate
+                  python3 -m pip install -U wheel pip pytest pytest-cov pycodestyle codecov
 
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+        - run:
+              name: install fuckery
+              command: |
+                  . venv/bin/activate
+                  python3 -m pip install -e .
 
-      # run tests!
-      # this example uses Django's built-in test-runner
-      # other common Python testing frameworks include pytest and nose
-      # https://pytest.org
-      # https://nose.readthedocs.io
-      - run:
-          name: run tests
-          command: |
-            . venv/bin/activate
-            python manage.py test
+        - save_cache:
+              paths:
+                  - ./venv
+              key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
+        - run:
+              name: syntax
+              command: |
+                  . venv/bin/activate
+                  if [ -n "${RUN_SYNTAX}" ]; then pycodestyle --max-line-length=120 --select E111,E101,E201,E202,E203,E221,E222,E223,E224,E225,E226,E227,E228,E231,E241,E242,E251,E303,E304,E502,E711,E712,E713,E714,E721,E741,E742,E743,W191,W291,W293,W292,W391,W602,W603 src/fuckery; fi;
+
+        - run:
+              name: run tests
+              command: |
+                  . venv/bin/activate
+                  mkdir test-reports
+                  circleci tests glob tests/test_*.py | circleci tests split --split-by=timings | xargs python -m pytest -v -s -rs --durations 6 --maxfail 6 -p no:logging --junitxml=test-reports/junit.xml ${COVERAGE_ARGS}
+
+        - run:
+              name: report coverage
+              command: |
+                  . venv/bin/activate
+                  if [ -n "${COVERAGE_ARGS}" ]; then codecov --name ${PYVERS}node${CIRCLE_NODE_INDEX} ${CODECOV_ARGS}; fi;
+
+        - store_test_results:
+              path: test-reports
+
+        - store_artifacts:
+              path: test-reports
+
+jobs:
+
+    python37:
+        parallelism: 2
+        docker:
+            - image: circleci/python:3.7
+              environment:
+                  RUN_SYNTAX: 1
+                  CODECOV_ARGS: --required
+                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail
+                  PYVERS: 3.7
+
+        working_directory: ~/repo
+
+        <<: *test_steps
+
+    python36:
+        parallelism: 2
+        docker:
+            - image: circleci/python:3.6
+              environment:
+                  RUN_SYNTAX: 1
+                  CODECOV_ARGS: --required
+                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail
+                  PYVERS: 3.6
+
+        working_directory: ~/repo
+
+        <<: *test_steps
+
+    build_container_branch:
+        docker:
+            - image: docker:18.05.0-ce
+        steps:
+            - checkout
+            - setup_remote_docker
+            - run:
+                  name: build image
+                  command: |
+                      docker build -t fuckery:dev -f Dockerfile .
+            - run:
+                  name: docker login
+                  command: |
+                      docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
+
+            - run:
+                  name: tag and push container
+                  command: |
+                      docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
+                      docker push williamgibb/fuckery:${CIRCLE_BRANCH}
+
+    build_container_tags:
+        docker:
+            - image: docker:18.05.0-ce
+        steps:
+            - checkout
+            - setup_remote_docker
+            - run:
+                  name: build image
+                  command: |
+                      docker build -t fuckery:dev -f Dockerfile .
+            - run:
+                  name: docker login
+                  command: |
+                      docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
+            - run:
+                  name: tag and push container
+                  command: |
+                      docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_TAG}
+                      docker push williamgibb/fuckery:${CIRCLE_TAG}
+
+    build_packages:
+        docker:
+            - image: circleci/python:3.7
+        steps:
+            - checkout
+
+            - restore_cache:
+                  keys:
+                      - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+
+            - run:
+                  name: install python dependencies
+                  command: |
+                      python3 -m venv venv
+                      . venv/bin/activate
+                      python3 -m pip install -U wheel pip
+                      python setup.py egg_info
+                      python -m pip install -U -r src/fuckery.egg-info/requires.txt
+
+            - save_cache:
+                paths:
+                    - ./venv
+                key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+
+            - run:
+                  name: verify git tag vs. version
+                  command: |
+                      . venv/bin/activate
+                      python setup.py verify
+            - run:
+                  name: init .pypirc
+                  command: |
+                      echo -e "[pypi]" >> ~/.pypirc
+                      echo -e "username = $PYPI_USERNAME" >> ~/.pypirc
+                      echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+            - run:
+                  name: create packages
+                  command: |
+                      . venv/bin/activate
+                      python setup.py sdist bdist_wheel
+
+            - run:
+                  name: upload to pypi
+                  command: |
+                      . venv/bin/activate
+                      twine upload dist/*
+
+
+workflows:
+    version: 2
+    run_tests:
+        jobs:
+            - python36
+            - python37
+            - build_packages:
+                  requires:
+                      - python36
+                      - python37
+                  filters:
+                      branches:
+                          only:
+                              - tags
+            - build_container_branch:
+                  requires:
+                      - python36
+                      - python37
+                  filters:
+                      branches:
+                          only:
+                              - circleci_fix
+                              - master
+            - build_container_tags:
+                  requires:
+                      - python36
+                      - python37
+                  filters:
+                      branches:
+                          only:
+                              - tags
