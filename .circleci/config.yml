@@ -101,7 +101,7 @@ jobs:
                       . venv/bin/activate
                       python3 -m pip install -U wheel pip
                       python setup.py egg_info
-                      pytohn -m pip install -U -r src/fuckery.egg-info/requires.txt
+                      python -m pip install -U -r src/fuckery.egg-info/requires.txt
 
             - save_cache:
                 paths:
