@@ -2,7 +2,7 @@
 
 FROM python:3.7
 
-COPY tests/assets/hello_world.bf /bf/hello_world.bf
+COPY tests/assets /bf
 COPY src /build/src
 COPY setup.py /build/setup.py
 COPY README.rst /build/README.rst
