@@ -18,7 +18,7 @@ from setuptools import setup
 from setuptools.command.install import install
 
 
-VERSION = '0.3.7'
+VERSION = '0.3.8'
 
 def read(*names, **kwargs):
     return io.open(
