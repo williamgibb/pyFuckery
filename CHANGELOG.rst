@@ -2,10 +2,11 @@
 Changelog
 =========
 
-0.3.9 (2018-04-03)
+0.3.9 (2018-04-28)
 ----------------------------------------
 * Use fstrings everywhere!
 * Change circleci config from 2.0 to 2.1.
+* Fix DeprecationWarning
 
 0.3.8 (2018-04-03)
 ----------------------------------------
