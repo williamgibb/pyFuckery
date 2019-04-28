@@ -40,11 +40,32 @@ MEMORY_MAX_VALUE = 255
 IGNORE_REGEX = f'\\{SYM_PTR_DEC}\\{SYM_PTR_INC}\\{SYM_DATA_DEC}\\{SYM_DATA_INC}' \
     f'\\{SYM_IO_INPUT}\\{SYM_IO_OUTPUT}\\{SYM_JMP_FWD}\\{SYM_JMP_BACKWARD}'
 
+GRAMMER = f'''
+
+{SYM_PROGRAM}: {SYM_EXPRESSIONS}*
+
+{SYM_LOOP}: JMP_FWD {SYM_EXPRESSIONS}* JMP_BCK
+
+{SYM_ACTIONS}: PTR_DEC | PTR_INC | DATA_DEC | DATA_INC | IO_INPUT | IO_OUTPUT
+
+{SYM_EXPRESSIONS}: {SYM_ACTIONS} | {SYM_LOOP}
+
+PTR_DEC: "{SYM_PTR_DEC}"
+PTR_INC: "{SYM_PTR_INC}"
+DATA_DEC: "{SYM_DATA_DEC}"
+DATA_INC: "{SYM_DATA_INC}"
+IO_INPUT: "{SYM_IO_INPUT}"
+IO_OUTPUT: "{SYM_IO_OUTPUT}"
+JMP_FWD: "{SYM_JMP_FWD}"
+JMP_BCK: "{SYM_JMP_BACKWARD}"
+
+'''
+
 # Credit where credit is due - largely influenced by from
 # https://webcache.googleusercontent.com/search?q=cache:cdkXLzIKMA0J:https://groups.google.com/a/cdglabs.org/d/topic
 # /ohm/Jvwx1jvPOqY+&cd=8&hl=en&ct=clnk&gl=us
 # which was inspired by https://www.researchgate.net/publication/255592935_Implementing_Brainfuck_in_COLA_Version_2
-GRAMMER = r'''
+OLD_GRAMMER = r'''
 
 {program}: {expression}*
 
