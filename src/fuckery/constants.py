@@ -44,7 +44,7 @@ IGNORE_REGEX = f'\\{SYM_PTR_DEC}\\{SYM_PTR_INC}\\{SYM_DATA_DEC}\\{SYM_DATA_INC}'
 # https://webcache.googleusercontent.com/search?q=cache:cdkXLzIKMA0J:https://groups.google.com/a/cdglabs.org/d/topic
 # /ohm/Jvwx1jvPOqY+&cd=8&hl=en&ct=clnk&gl=us
 # which was inspired by https://www.researchgate.net/publication/255592935_Implementing_Brainfuck_in_COLA_Version_2
-GRAMMER = f'''
+GRAMMAR = f'''
 
 {SYM_PROGRAM}: {SYM_EXPRESSIONS}*
 

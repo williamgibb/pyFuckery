@@ -13,7 +13,7 @@ import logging
 import sys
 
 # Custom Code
-from fuckery.constants import GRAMMER
+from fuckery.constants import GRAMMAR
 # Third Party Code
 from lark import Lark
 from lark import Tree
@@ -28,7 +28,7 @@ def parse_program(s: str) -> Tree:
     :param s: Brainfuck program to parse.
     :return:
     """
-    brainfuck_parser = Lark(GRAMMER, start='program')
+    brainfuck_parser = Lark(GRAMMAR, start='program')
     r = brainfuck_parser.parse(s)
     return r
 
