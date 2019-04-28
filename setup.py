@@ -78,6 +78,7 @@ setup(
     ],
     install_requires=[
        'lark-parser>=0.7.0,<0.8.0',
+        'msgpack>=0.6.1,<0.7.0',
     ],
     extras_require={
         # eg:

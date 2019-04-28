@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.4.1 (2018-04-28)
+----------------------------------------
+* Use msgpack to serialize the memory blob for use in loop detection. Makes fuckery vroom vroom fast.
+
 0.4.0 (2018-04-28)
 ----------------------------------------
 * Update lark to a modern version

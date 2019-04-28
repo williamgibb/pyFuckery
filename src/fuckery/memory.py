@@ -14,6 +14,8 @@ import logging
 import sys
 
 # Third Party Code
+import msgpack
+
 # Custom Code
 from fuckery.constants import DEFAULT_MEMORY_SIZE
 from fuckery.constants import MEMORY_MAX_VALUE
@@ -48,12 +50,15 @@ class Storage(object):
         Returns a hash of the state of the memory.
 
         Note - Computing this frequently can be expensive to do as the memory section is
-        serialized via json.dumps() prior to hashing.
+        serialized via msgpack.dumps() prior to hashing.
 
         :return:
         """
-        s = json.dumps(self.mem, sort_keys=True)
-        ret = hashlib.md5(s.encode()).hexdigest()
+        # We're abusing the python 3.6 ordereddict behavior which
+        # became a part of the cpython spec in 3.7 for this
+        # to work.  It really only works since we pre-initialize
+        # the self.mem dictionary on startup.
+        ret = hashlib.md5(msgpack.dumps(self.mem)).hexdigest()
         return ret
 
     def __contains__(self, item):

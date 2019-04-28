@@ -79,7 +79,7 @@ class VirtualMachine(object):
         MD5 representing the state of the system.  It is a hash of the memory and the current data pointer.
 
         Note - Computing this frequently can be expensive to do with a large memory section,
-        as the memory section is serialized via json.dumps() prior to hashing.
+        as the memory section is serialized via msgpack.dumps() prior to hashing.
 
         :return:
         """
