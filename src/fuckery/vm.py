@@ -95,7 +95,7 @@ class VirtualMachine(object):
         """
         temp = self.data_pointer + 1
         if temp not in self.memory:
-            raise VMError('Invalid memory address: {}'.format(temp))
+            raise VMError(f'Invalid memory address: {temp}')
         self.data_pointer = temp
 
     def dec_data_ptr(self) -> None:
@@ -106,7 +106,7 @@ class VirtualMachine(object):
         """
         temp = self.data_pointer - 1
         if temp not in self.memory:
-            raise VMError('Invalid memory address: {}'.format(temp))
+            raise VMError(f'Invalid memory address: {temp}')
         self.data_pointer = temp
 
     def inc_data_value(self) -> None:
@@ -191,7 +191,7 @@ class VirtualMachine(object):
             return
         if tree.data == SYM_EXPRESSIONS:
             for i, t in enumerate(tree.children):
-                # log.debug('Executing command #{} - {}'.format(i, repr(t)))
+                # log.debug(f'Executing command #{i} - {repr(t)}')
                 self.run(tree=t)
             return
         if tree.data == SYM_LOOP:
@@ -207,7 +207,7 @@ class VirtualMachine(object):
                         raise VMError('Infinite loop detected - no change in memory during loop execution!')
                     sh = self.state_hash
             return
-        raise NotImplementedError('Unknown tree type seen: {}'.format(tree.data))  # pragma: no cover
+        raise NotImplementedError(f'Unknown tree type seen: {tree.data}')  # pragma: no cover
 
     def parse_and_run(self, program: str) -> None:
         """

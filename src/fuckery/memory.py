@@ -70,7 +70,7 @@ class Storage(object):
         :return:
         """
         if addr not in self:
-            raise AddressError('Address is invalid: {}'.format(addr))
+            raise AddressError(f'Address is invalid: {addr}')
         return self.mem.get(addr)
 
     def set(self, addr, value):
@@ -82,11 +82,11 @@ class Storage(object):
         :return:
         """
         if addr not in self:
-            raise AddressError('Address is invalid: {}'.format(addr))
+            raise AddressError(f'Address is invalid: {addr}')
         if not isinstance(value, int):
-            raise StorageError('Value is not an int: {}'.format(type(value)))
+            raise StorageError(f'Value is not an int: {type(value)}')
         if value < self.min or value > self.max:
-            raise StorageError('Value is out of size bounds: {}'.format(value))
+            raise StorageError(f'Value is out of size bounds: {value}')
         self.mem[addr] = value
 
 
@@ -97,10 +97,10 @@ def main(options):  # pragma: no cover
 
     m = Storage(n=25)
     v = m.get(0)
-    log.info('m[0] is {}'.format(v))
+    log.info(f'm[0] is {v}')
     m.set(24, 1)
     v = m.get(0)
-    log.info('m[24] is {}'.format(v))
+    log.info(f'm[24] is {v}')
     sys.exit(0)
 
 
