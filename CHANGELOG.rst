@@ -2,9 +2,10 @@
 Changelog
 =========
 
-0.4.0 TBD
+0.4.0 (2018-04-28)
 ----------------------------------------
-* Update lark
+* Update lark to a modern version
+* Rearrange test code layout a bit
 
 0.3.9 (2018-04-28)
 ----------------------------------------
