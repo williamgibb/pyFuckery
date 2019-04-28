@@ -14,26 +14,11 @@ import lark
 # Custom code
 from fuckery import parser
 
+import tests.common as t_common
+
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')
 log = logging.getLogger(__name__)
-
-# Assets Configuration
-ASSETS = os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'assets')
-assert os.path.isdir(ASSETS)
-
-
-def get_file(fn) -> str:
-    fp = os.path.join(ASSETS, fn)
-    assert os.path.isfile(fp)
-    return fp
-
-
-def get_fn_contents(fn) -> bytes:
-    fp = get_file(fn=fn)
-    with open(fp, 'rb') as f:
-        buf = f.read()
-    return buf
 
 
 class TestParser:  # XXX CamelCase
@@ -51,7 +36,7 @@ class TestParser:  # XXX CamelCase
     def test_commented_add_program(self):
         test_bf = '[->+<]'
         fn = 'add.bf'
-        buf = get_fn_contents(fn=fn)
+        buf = t_common.get_fn_contents(fn=fn)
         bf = buf.decode()
         t = parser.parse_program(s=bf)
         ts = t.pretty()
@@ -61,7 +46,7 @@ class TestParser:  # XXX CamelCase
 
     def test_hello_world_parse(self):
         fn = 'hello_world.bf'
-        buf = get_fn_contents(fn=fn)
+        buf = t_common.get_fn_contents(fn=fn)
         bf = buf.decode()
         t = parser.parse_program(s=bf)
         assert isinstance(t, lark.Tree)

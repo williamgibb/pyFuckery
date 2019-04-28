@@ -18,26 +18,11 @@ from fuckery.exc import VMError
 from fuckery.parser import parse_program
 from fuckery.vm import VirtualMachine
 
+import tests.common as t_common
+
 # Logging config
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')
 log = logging.getLogger(__name__)
-
-# Assets Configuration
-ASSETS = os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'assets')
-assert os.path.isdir(ASSETS)
-
-
-def get_file(fn) -> str:
-    fp = os.path.join(ASSETS, fn)
-    assert os.path.isfile(fp)
-    return fp
-
-
-def get_fn_contents(fn) -> bytes:
-    fp = get_file(fn=fn)
-    with open(fp, 'rb') as f:
-        buf = f.read()
-    return buf
 
 
 @pytest.fixture()
@@ -156,7 +141,7 @@ class TestExecution:
     def test_add(self, test_vm: VirtualMachine):
         # The add.bf program won't do anything since the loop will not be entered.
         fn = 'add.bf'
-        buf = get_fn_contents(fn=fn)
+        buf = t_common.get_fn_contents(fn=fn)
         bf = buf.decode()
         tree = parse_program(s=bf)
         test_vm.stream_out = io.StringIO()
@@ -166,7 +151,7 @@ class TestExecution:
 
     def test_hello_world(self, test_vm: VirtualMachine):
         fn = 'hello_world.bf'
-        buf = get_fn_contents(fn=fn)
+        buf = t_common.get_fn_contents(fn=fn)
         bf = buf.decode()
         tree = parse_program(s=bf)
         test_vm.stream_out = io.StringIO()

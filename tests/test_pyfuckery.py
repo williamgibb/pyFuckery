@@ -2,15 +2,11 @@ import argparse
 import os
 from fuckery.cli import main
 
-
-# Assets Configuration
-ASSETS = os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'assets')
-assert os.path.isdir(ASSETS)
-
+import tests.common as t_common
 
 def test_main():
     fn = 'hello_world.bf'
-    fp = os.path.join(ASSETS, fn)
+    fp = t_common.get_file(fn)
     ns = argparse.Namespace()
     ns.verbose = False
     ns.input = fp
