@@ -1,10 +1,12 @@
-# Python CircleCI 2.0 configuration file
+# Python CircleCI 2.1 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-version: 2
+version: 2.1
 
-test_steps:  &test_steps
+commands:
+  test_steps_python:
+    description: "Python test steps"
     steps:
         - checkout
 
@@ -69,7 +71,8 @@ jobs:
 
         working_directory: ~/repo
 
-        <<: *test_steps
+        steps:
+            - test_steps_python
 
     python36:
         parallelism: 2
@@ -83,7 +86,8 @@ jobs:
 
         working_directory: ~/repo
 
-        <<: *test_steps
+        steps:
+            - test_steps_python
 
     build_container_branch:
         docker:
