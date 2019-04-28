@@ -43,7 +43,7 @@ def main(options):  # pragma: no cover
 
     s = buf.decode()
 
-    log.debug('Parsing: {}'.format(s))
+    log.debug(f'Parsing: {s}')
 
     t = parse_program(s=s)
     print(t.pretty())

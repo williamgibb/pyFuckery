@@ -33,10 +33,11 @@ def main(options):
     with open(options.input, 'rb') as f:
         buf = f.read()
 
-    log.info('Parsing {}'.format(os.path.basename(bn)))
+    fn = os.path.basename(bn)
+    log.info(f'Parsing {fn}')
     s = buf.decode()
     tree = parse_program(s=s)
-    log.info('Executing {}'.format(os.path.basename(bn)))
+    log.info(f'Executing {fn}')
     vm = VirtualMachine(memory_size=options.memory_size,
                         loop_detection=options.loop_detection)
     try:
@@ -64,5 +65,4 @@ def _main():  # pragma: no cover
                         format='%(asctime)s [%(levelname)s] %(message)s [%(filename)s:%(funcName)s]')
     p = makeargpaser()
     opts = p.parse_args()
-    print(opts)
     main(opts)

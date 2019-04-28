@@ -37,14 +37,8 @@ MEMORY_MAX_VALUE = 255
 
 # EBNF Grammer for Brainfuck
 
-IGNORE_REGEX = '\{}\{}\{}\{}\{}\{}\{}\{}'.format(SYM_PTR_DEC,
-                                                 SYM_PTR_INC,
-                                                 SYM_DATA_DEC,
-                                                 SYM_DATA_INC,
-                                                 SYM_IO_INPUT,
-                                                 SYM_IO_OUTPUT,
-                                                 SYM_JMP_FWD,
-                                                 SYM_JMP_BACKWARD)
+IGNORE_REGEX = f'\{SYM_PTR_DEC}\{SYM_PTR_INC}\{SYM_DATA_DEC}\{SYM_DATA_INC}' \
+    f'\{SYM_IO_INPUT}\{SYM_IO_OUTPUT}\{SYM_JMP_FWD}\{SYM_JMP_BACKWARD}'
 
 # Credit where credit is due - largely influenced by from
 # https://webcache.googleusercontent.com/search?q=cache:cdkXLzIKMA0J:https://groups.google.com/a/cdglabs.org/d/topic

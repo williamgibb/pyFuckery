@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.3.9 (2018-04-03)
+----------------------------------------
+* Use fstrings everywhere!
+* Change circleci config from 2.0 to 2.1.
+
 0.3.8 (2018-04-03)
 ----------------------------------------
 * Add daily CI builds.
