@@ -12,7 +12,7 @@ Overview
     * - tests
       - | |appveyor| |circleci| |requires|
         | |codecov|
-        | |landscape|
+        | |codeclimate|
     * - package
       - | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
@@ -37,9 +37,9 @@ Overview
     :alt: Coverage Status
     :target: https://codecov.io/github/williamgibb/pyFuckery
 
-.. |landscape| image:: https://landscape.io/github/williamgibb/pyFuckery/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/williamgibb/pyFuckery/master
-    :alt: Code Quality Status
+.. |codeclimate| image:: https://api.codeclimate.com/v1/badges/c983cdddacfb3eab3f86/maintainability
+   :target: https://codeclimate.com/github/williamgibb/pyFuckery/maintainability
+   :alt: Maintainability
 
 .. |version| image:: https://img.shields.io/pypi/v/fuckery.svg
     :alt: PyPI Package latest release
