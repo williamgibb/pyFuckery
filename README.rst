@@ -49,15 +49,11 @@ Overview
     :alt: Commits since latest release
     :target: https://github.com/williamgibb/pyFuckery/compare/v0.4.1...master
 
-.. |downloads| image:: https://img.shields.io/pypi/dm/fuckery.svg
-    :alt: PyPI Package monthly downloads
-    :target: https://pypi.python.org/pypi/fuckery
-
 .. |wheel| image:: https://img.shields.io/pypi/wheel/fuckery.svg
     :alt: PyPI Wheel
     :target: https://pypi.python.org/pypi/fuckery
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/ fuckery.svg
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/fuckery.svg
     :alt: Supported versions
     :target: https://pypi.python.org/pypi/fuckery
 
