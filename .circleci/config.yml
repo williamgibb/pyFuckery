@@ -4,6 +4,9 @@
 #
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@1.0.5
+
 commands:
   test_steps_python:
     description: "Python test steps"
@@ -19,7 +22,7 @@ commands:
               command: |
                   python3 -m venv --copies venv
                   . venv/bin/activate
-                  python3 -m pip install -U wheel pip pytest pytest-cov pycodestyle codecov
+                  python3 -m pip install -U wheel pip pytest pytest-cov pycodestyle
 
         - run:
               name: install fuckery
@@ -45,11 +48,10 @@ commands:
                   mkdir test-reports
                   circleci tests glob tests/test_*.py | circleci tests split --split-by=timings | xargs python -m pytest -v -s -rs --durations 6 --maxfail 6 -p no:logging --junitxml=test-reports/junit.xml ${COVERAGE_ARGS}
 
-        - run:
-              name: report coverage
-              command: |
-                  . venv/bin/activate
-                  if [ -n "${COVERAGE_ARGS}" ]; then codecov --name ${PYVERS}node${CIRCLE_NODE_INDEX} ${CODECOV_ARGS}; fi;
+        - codecov/upload:
+           file: /home/circleci/repo/coverage.xml
+           upload_name: ${PYVERS}node${CIRCLE_NODE_INDEX}
+           flags: ${PYVERS}
 
         - store_test_results:
               path: test-reports
@@ -65,8 +67,7 @@ jobs:
             - image: circleci/python:3.7
               environment:
                   RUN_SYNTAX: 1
-                  CODECOV_ARGS: --required
-                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail
+                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
                   PYVERS: 3.7
 
         working_directory: ~/repo
@@ -80,8 +81,7 @@ jobs:
             - image: circleci/python:3.6
               environment:
                   RUN_SYNTAX: 1
-                  CODECOV_ARGS: --required
-                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail
+                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
                   PYVERS: 3.6
 
         working_directory: ~/repo
