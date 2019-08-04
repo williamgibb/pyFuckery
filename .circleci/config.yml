@@ -48,7 +48,7 @@ commands:
                   mkdir test-reports
                   circleci tests glob tests/test_*.py | circleci tests split --split-by=timings | xargs python -m pytest -v -s -rs --durations 6 --maxfail 6 -p no:logging --junitxml=test-reports/junit.xml ${COVERAGE_ARGS}
 
-      -  codecov/upload:
+        - codecov/upload:
            file: /home/circleci/repo/coverage.xml
            upload_name: ${PYVERS}node${CIRCLE_NODE_INDEX}
            flags: ${PYVERS}
