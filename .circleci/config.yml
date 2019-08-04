@@ -51,7 +51,6 @@ commands:
         - codecov/upload:
            file: /home/circleci/repo/coverage.xml
            upload_name: ${PYVERS}node${CIRCLE_NODE_INDEX}
-           flags: ${PYVERS}
 
         - store_test_results:
               path: test-reports
