@@ -233,7 +233,7 @@ workflows:
                       - python37
                   filters:
                       tags:
-                          only: /^v([0-9.]+)$/
+                          only: /^v0\.4\.[0-9.]+$/
                       branches:
                           ignore: /.*/
 
@@ -244,7 +244,7 @@ workflows:
                   filters:
                       branches:
                           only:
-                              - master
+                              - 04x
 
             - build_container_tags:
                   requires:
@@ -252,7 +252,7 @@ workflows:
                       - python37
                   filters:
                       tags:
-                          only: /^v([0-9.]+)$/
+                          only: /^v0\.4\.[0-9.]+$/
                       branches:
                           ignore: /.*/
 
