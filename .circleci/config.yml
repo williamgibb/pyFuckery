@@ -129,7 +129,7 @@ jobs:
                       docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_TAG}
                       docker push williamgibb/fuckery:${CIRCLE_TAG}
 
-    build_container_tags_04x:
+    build_container_tags_05x:
         docker:
             - image: docker:18.05.0-ce
         steps:
@@ -146,8 +146,8 @@ jobs:
             - run:
                   name: tag and push container
                   command: |
-                      docker image tag fuckery:dev williamgibb/fuckery:v0.4.x
-                      docker push williamgibb/fuckery:v0.4.x
+                      docker image tag fuckery:dev williamgibb/fuckery:v0.5.x
+                      docker push williamgibb/fuckery:v0.5.x
 
     build_packages:
         docker:
@@ -233,7 +233,7 @@ workflows:
                       - python37
                   filters:
                       tags:
-                          only: /^v([0-9.]+)$/
+                          only: /^v0\.5\.[0-9.]+((a|b|rc)[0-9])?$/
                       branches:
                           ignore: /.*/
 
@@ -252,16 +252,16 @@ workflows:
                       - python37
                   filters:
                       tags:
-                          only: /^v([0-9.]+)$/
+                          only: /^v0\.5\.[0-9.]+((a|b|rc)[0-9])?$/
                       branches:
                           ignore: /.*/
 
-            - build_container_tags_04x:
+            - build_container_tags_05x:
                   requires:
                       - python36
                       - python37
                   filters:
                       tags:
-                          only: /^v0\.4\.[0-9.]+$/
+                          only: /^v0\.5\.[0-9]+$/
                       branches:
                           ignore: /.*/
