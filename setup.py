@@ -18,7 +18,7 @@ from setuptools import setup
 from setuptools.command.install import install
 
 
-VERSION = '0.5.0rc2'
+VERSION = '0.5.0'
 
 def read(*names, **kwargs):
     return io.open(
