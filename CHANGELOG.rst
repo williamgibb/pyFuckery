@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.4.2 (2020-04-13)
+----------------------------------------
+* Bump for new docker images.
+
 0.4.1 (2018-04-28)
 ----------------------------------------
 * Use msgpack to serialize the memory blob for use in loop detection. Makes fuckery vroom vroom fast.
