@@ -2,6 +2,12 @@
 Changelog
 =========
 
+
+0.5.0 (2020-03-13)
+----------------------------------------
+* Bump lark
+* CI tweaks.
+
 0.4.1 (2018-04-28)
 ----------------------------------------
 * Use msgpack to serialize the memory blob for use in loop detection. Makes fuckery vroom vroom fast.
