@@ -151,7 +151,7 @@ jobs:
 
     build_packages:
         environment:
-            PYPI_TEST_CODE="import fuckery; print(fuckery.__version__)"
+            PYPI_SMOKE_CODE="import fuckery; print(fuckery.__version__)"
         docker:
             - image: circleci/python:3.7
         steps:
