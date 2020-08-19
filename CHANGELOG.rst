@@ -2,9 +2,13 @@
 Changelog
 =========
 
+0.5.2 (2020-08-19)
+----------------------------------------
+* Another CI tweak to validate pypi packages.
+
 0.5.1 (2020-08-19)
 ----------------------------------------
-* CI tweak to validate pypi packagse.
+* CI tweak to validate pypi packages.
 
 0.5.0 (2020-03-13)
 ----------------------------------------
