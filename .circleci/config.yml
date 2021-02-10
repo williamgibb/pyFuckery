@@ -308,7 +308,6 @@ workflows:
                               - master
 
             - build_container_branch_optional:
-                  type: approval
                   requires:
                       - hold
 
