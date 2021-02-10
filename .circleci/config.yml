@@ -58,6 +58,26 @@ commands:
         - store_artifacts:
               path: test-reports
 
+  docker_branch_build:
+      description: do a branch docker build
+      steps:
+          - checkout
+          - setup_remote_docker
+          - run:
+                name: build image
+                command: |
+                    docker build -t fuckery:dev -f Dockerfile .
+          - run:
+                name: docker login
+                command: |
+                    docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
+
+          - run:
+                name: tag and push container
+                command: |
+                    docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
+                    docker push williamgibb/fuckery:${CIRCLE_BRANCH}
+
 jobs:
 
     python37:
@@ -108,6 +128,13 @@ jobs:
                   command: |
                       docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
                       docker push williamgibb/fuckery:${CIRCLE_BRANCH}
+
+
+    build_container_branch_optional:
+        docker:
+            - image: docker:18.05.0-ce
+        steps:
+            - docker_branch_build
 
     build_container_tags:
         docker:
@@ -277,7 +304,7 @@ workflows:
                       - python37
                   filters:
                       branches:
-                          excludes:
+                          ignore:
                               - master
 
             - build_container_tags:
