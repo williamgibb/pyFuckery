@@ -112,23 +112,7 @@ jobs:
         docker:
             - image: docker:18.05.0-ce
         steps:
-            - checkout
-            - setup_remote_docker
-            - run:
-                  name: build image
-                  command: |
-                      docker build -t fuckery:dev -f Dockerfile .
-            - run:
-                  name: docker login
-                  command: |
-                      docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_PASSWORD}"
-
-            - run:
-                  name: tag and push container
-                  command: |
-                      docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_BRANCH}
-                      docker push williamgibb/fuckery:${CIRCLE_BRANCH}
-
+            - docker_branch_build
 
     build_container_branch_optional:
         docker:
@@ -297,7 +281,7 @@ workflows:
                           only:
                               - master
 
-            - hold:
+            - docker_branch_hold:
                   type: approval
                   requires:
                       - python36
@@ -309,7 +293,7 @@ workflows:
 
             - build_container_branch_optional:
                   requires:
-                      - hold
+                      - docker_branch_hold
 
             - build_container_tags:
                   requires:
