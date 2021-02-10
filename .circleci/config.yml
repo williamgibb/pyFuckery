@@ -297,7 +297,7 @@ workflows:
                           only:
                               - master
 
-            - build_container_branch_optional:
+            - hold:
                   type: approval
                   requires:
                       - python36
@@ -306,6 +306,11 @@ workflows:
                       branches:
                           ignore:
                               - master
+
+            - build_container_branch_optional:
+                  type: approval
+                  requires:
+                      - hold
 
             - build_container_tags:
                   requires:
