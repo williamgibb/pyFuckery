@@ -263,6 +263,8 @@ workflows:
                           only: /.*/
 
             - build_packages:
+                  context:
+                      - Pypi
                   requires:
                       - python38
                       - python310
@@ -273,6 +275,8 @@ workflows:
                           ignore: /.*/
 
             - build_container_branch:
+                  context:
+                      - DockerCreds
                   requires:
                       - python38
                       - python310
@@ -296,6 +300,8 @@ workflows:
                       - docker_branch_hold
 
             - build_container_tags:
+                  context:
+                      - DockerCreds
                   requires:
                       - python38
                       - python310
@@ -306,6 +312,8 @@ workflows:
                           ignore: /.*/
 
             - build_container_tags_05x:
+                  context:
+                      - DockerCreds
                   requires:
                       - python38
                       - python310
