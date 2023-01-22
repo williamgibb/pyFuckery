@@ -15,7 +15,7 @@ commands:
 
         - restore_cache:
               keys:
-                  - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                  - v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
         - run:
               name: setup venv
@@ -33,7 +33,7 @@ commands:
         - save_cache:
               paths:
                   - ./venv
-              key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+              key: v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
         - run:
               name: syntax
@@ -170,7 +170,7 @@ jobs:
 
             - restore_cache:
                   keys:
-                      - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                      - v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
                   name: install python dependencies
@@ -184,7 +184,7 @@ jobs:
             - save_cache:
                 paths:
                     - ./venv
-                key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                key: v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
                   name: verify git tag vs. version
