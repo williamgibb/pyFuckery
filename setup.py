@@ -68,8 +68,8 @@ setup(
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Other',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development :: Interpreters',
     ],
@@ -77,8 +77,8 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     install_requires=[
-       'lark-parser>=0.7.0,<0.8.0',
-        'msgpack>=0.6.1,<0.7.0',
+        'lark-parser>=0.7.0,<0.8.0',
+        'msgpack>=1.0.4,<1.1.0',
     ],
     extras_require={
         # eg:

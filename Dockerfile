@@ -1,6 +1,6 @@
 # vim:set ft=dockerfile:
 
-FROM python:3.7
+FROM python:3.10
 
 COPY tests/assets /bf
 COPY src /build/src

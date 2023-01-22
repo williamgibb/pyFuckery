@@ -15,7 +15,7 @@ commands:
 
         - restore_cache:
               keys:
-                  - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                  - v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
         - run:
               name: setup venv
@@ -33,7 +33,7 @@ commands:
         - save_cache:
               paths:
                   - ./venv
-              key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+              key: v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
         - run:
               name: syntax
@@ -80,28 +80,28 @@ commands:
 
 jobs:
 
-    python37:
+    python310:
         parallelism: 2
         docker:
-            - image: circleci/python:3.7
+            - image: circleci/python:3.10
               environment:
                   RUN_SYNTAX: 1
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
-                  PYVERS: 3.7
+                  PYVERS: 3.10
 
         working_directory: ~/repo
 
         steps:
             - test_steps_python
 
-    python36:
+    python38:
         parallelism: 2
         docker:
-            - image: circleci/python:3.6
+            - image: circleci/python:3.8
               environment:
                   RUN_SYNTAX: 1
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
-                  PYVERS: 3.6
+                  PYVERS: 3.8
 
         working_directory: ~/repo
 
@@ -110,19 +110,19 @@ jobs:
 
     build_container_branch:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - docker_branch_build
 
     build_container_branch_optional:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - docker_branch_build
 
     build_container_tags:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - checkout
             - setup_remote_docker
@@ -140,9 +140,9 @@ jobs:
                       docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_TAG}
                       docker push williamgibb/fuckery:${CIRCLE_TAG}
 
-    build_container_tags_05x:
+    build_container_tags_06x:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - checkout
             - setup_remote_docker
@@ -157,20 +157,20 @@ jobs:
             - run:
                   name: tag and push container
                   command: |
-                      docker image tag fuckery:dev williamgibb/fuckery:v0.5.x
-                      docker push williamgibb/fuckery:v0.5.x
+                      docker image tag fuckery:dev williamgibb/fuckery:v0.6.x
+                      docker push williamgibb/fuckery:v0.6.x
 
     build_packages:
         environment:
             PYPI_SMOKE_CODE: import fuckery; print(fuckery.__version__)
         docker:
-            - image: circleci/python:3.7
+            - image: circleci/python:3.10
         steps:
             - checkout
 
             - restore_cache:
                   keys:
-                      - v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                      - v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
                   name: install python dependencies
@@ -184,7 +184,7 @@ jobs:
             - save_cache:
                 paths:
                     - ./venv
-                key: v1-venv-{{ .Environment.CIRCLE_STAGE }}-{{ .Branch }}-{{ checksum "setup.py" }}
+                key: v1-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "setup.py" }}
 
             - run:
                   name: verify git tag vs. version
@@ -244,18 +244,18 @@ workflows:
                           only:
                               - master
         jobs:
-            - python36
-            - python37
+            - python38
+            - python310
     run_tests:
         jobs:
-            - python36:
+            - python38:
                   filters:
                       tags:
                           only: /.*/
                       branches:
                           only: /.*/
 
-            - python37:
+            - python310:
                   filters:
                       tags:
                           only: /.*/
@@ -263,19 +263,23 @@ workflows:
                           only: /.*/
 
             - build_packages:
+                  context:
+                      - Pypi
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       tags:
-                          only: /^v0\.5\.[0-9.]+((a|b|rc)[0-9])?$/
+                          only: /^v0\.6\.[0-9.]+((a|b|rc)[0-9])?$/
                       branches:
                           ignore: /.*/
 
             - build_container_branch:
+                  context:
+                      - DockerCreds
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       branches:
                           only:
@@ -284,33 +288,39 @@ workflows:
             - docker_branch_hold:
                   type: approval
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       branches:
                           ignore:
                               - master
 
             - build_container_branch_optional:
+                  context:
+                      - DockerCreds
                   requires:
                       - docker_branch_hold
 
             - build_container_tags:
+                  context:
+                      - DockerCreds
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       tags:
-                          only: /^v0\.5\.[0-9.]+((a|b|rc)[0-9])?$/
+                          only: /^v0\.6\.[0-9.]+((a|b|rc)[0-9])?$/
                       branches:
                           ignore: /.*/
 
-            - build_container_tags_05x:
+            - build_container_tags_06x:
+                  context:
+                      - DockerCreds
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       tags:
-                          only: /^v0\.5\.[0-9]+$/
+                          only: /^v0\.6\.[0-9]+$/
                       branches:
                           ignore: /.*/
