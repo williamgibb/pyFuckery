@@ -235,11 +235,17 @@ jobs:
 
 workflows:
     version: 2
-    nightly:
+    weekly:
+        and:
+            -   equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+            -   equal: [ weekly, << pipeline.schedule.name >> ]
         jobs:
             - python38
             - python310
     run_tests:
+        when:
+            not:
+                equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         jobs:
             - python38:
                   filters:
