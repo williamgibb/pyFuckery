@@ -110,19 +110,19 @@ jobs:
 
     build_container_branch:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - docker_branch_build
 
     build_container_branch_optional:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - docker_branch_build
 
     build_container_tags:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - checkout
             - setup_remote_docker
@@ -142,7 +142,7 @@ jobs:
 
     build_container_tags_05x:
         docker:
-            - image: docker:18.05.0-ce
+            - image: docker:20.10.18
         steps:
             - checkout
             - setup_remote_docker
