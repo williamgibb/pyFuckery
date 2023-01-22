@@ -140,7 +140,7 @@ jobs:
                       docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_TAG}
                       docker push williamgibb/fuckery:${CIRCLE_TAG}
 
-    build_container_tags_05x:
+    build_container_tags_06x:
         docker:
             - image: docker:20.10.18
         steps:
