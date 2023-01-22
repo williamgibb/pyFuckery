@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.6.0 (2023-01-22)
+------------------
+* Drop 3.6 and 3.7 support. Add 3.8 and 3.10 as build / release targets.
+* Move docker image to using python:3.10.
+
 0.5.3 (2020-08-19)
 ----------------------------------------
 * Another CI tweak to validate pypi packages.
