@@ -80,28 +80,28 @@ commands:
 
 jobs:
 
-    python37:
+    python310:
         parallelism: 2
         docker:
-            - image: circleci/python:3.7
+            - image: circleci/python:3.10
               environment:
                   RUN_SYNTAX: 1
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
-                  PYVERS: 3.7
+                  PYVERS: 3.10
 
         working_directory: ~/repo
 
         steps:
             - test_steps_python
 
-    python36:
+    python38:
         parallelism: 2
         docker:
-            - image: circleci/python:3.6
+            - image: circleci/python:3.8
               environment:
                   RUN_SYNTAX: 1
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
-                  PYVERS: 3.6
+                  PYVERS: 3.8
 
         working_directory: ~/repo
 
@@ -164,7 +164,7 @@ jobs:
         environment:
             PYPI_SMOKE_CODE: import fuckery; print(fuckery.__version__)
         docker:
-            - image: circleci/python:3.7
+            - image: circleci/python:3.10
         steps:
             - checkout
 
@@ -244,18 +244,18 @@ workflows:
                           only:
                               - master
         jobs:
-            - python36
-            - python37
+            - python38
+            - python310
     run_tests:
         jobs:
-            - python36:
+            - python38:
                   filters:
                       tags:
                           only: /.*/
                       branches:
                           only: /.*/
 
-            - python37:
+            - python310:
                   filters:
                       tags:
                           only: /.*/
@@ -264,8 +264,8 @@ workflows:
 
             - build_packages:
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       tags:
                           only: /^v0\.5\.[0-9.]+((a|b|rc)[0-9])?$/
@@ -274,8 +274,8 @@ workflows:
 
             - build_container_branch:
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       branches:
                           only:
@@ -284,8 +284,8 @@ workflows:
             - docker_branch_hold:
                   type: approval
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       branches:
                           ignore:
@@ -297,8 +297,8 @@ workflows:
 
             - build_container_tags:
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       tags:
                           only: /^v0\.5\.[0-9.]+((a|b|rc)[0-9])?$/
@@ -307,8 +307,8 @@ workflows:
 
             - build_container_tags_05x:
                   requires:
-                      - python36
-                      - python37
+                      - python38
+                      - python310
                   filters:
                       tags:
                           only: /^v0\.5\.[0-9]+$/
