@@ -77,8 +77,8 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     install_requires=[
-       'lark-parser>=0.7.0,<0.8.0',
-        'msgpack>=1.0.4,1.1.0',
+        'lark-parser>=0.7.0,<0.8.0',
+        'msgpack>=1.0.4,<1.1.0',
     ],
     extras_require={
         # eg:
