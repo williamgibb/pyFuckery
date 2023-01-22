@@ -296,6 +296,8 @@ workflows:
                               - master
 
             - build_container_branch_optional:
+                  context:
+                      - DockerCreds
                   requires:
                       - docker_branch_hold
 
