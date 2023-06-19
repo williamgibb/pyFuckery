@@ -80,28 +80,14 @@ commands:
 
 jobs:
 
-    python310:
+    python311:
         parallelism: 2
         docker:
-            - image: circleci/python:3.10
+            - image: circleci/python:3.11
               environment:
                   RUN_SYNTAX: 1
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
-                  PYVERS: 3.10
-
-        working_directory: ~/repo
-
-        steps:
-            - test_steps_python
-
-    python38:
-        parallelism: 2
-        docker:
-            - image: circleci/python:3.8
-              environment:
-                  RUN_SYNTAX: 1
-                  COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
-                  PYVERS: 3.8
+                  PYVERS: 3.11
 
         working_directory: ~/repo
 
@@ -140,7 +126,7 @@ jobs:
                       docker image tag fuckery:dev williamgibb/fuckery:${CIRCLE_TAG}
                       docker push williamgibb/fuckery:${CIRCLE_TAG}
 
-    build_container_tags_06x:
+    build_container_tags_07x:
         docker:
             - image: docker:20.10.18
         steps:
@@ -157,8 +143,8 @@ jobs:
             - run:
                   name: tag and push container
                   command: |
-                      docker image tag fuckery:dev williamgibb/fuckery:v0.6.x
-                      docker push williamgibb/fuckery:v0.6.x
+                      docker image tag fuckery:dev williamgibb/fuckery:v0.7.x
+                      docker push williamgibb/fuckery:v0.7.x
 
     build_packages:
         environment:
@@ -232,7 +218,6 @@ jobs:
                       . venv/bin/activate
                       twine upload dist/*
 
-
 workflows:
     weekly:
         when:
@@ -240,21 +225,13 @@ workflows:
                 - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
                 - equal: [ weekly, << pipeline.schedule.name >> ]
         jobs:
-            - python38
-            - python310
+            - python311
     run_tests:
         when:
             not:
                 equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         jobs:
-            - python38:
-                  filters:
-                      tags:
-                          only: /.*/
-                      branches:
-                          only: /.*/
-
-            - python310:
+            - python311:
                   filters:
                       tags:
                           only: /.*/
@@ -265,8 +242,7 @@ workflows:
                   context:
                       - Pypi
                   requires:
-                      - python38
-                      - python310
+                      - python311
                   filters:
                       tags:
                           only: /^v0\.6\.[0-9.]+((a|b|rc)[0-9])?$/
@@ -277,8 +253,7 @@ workflows:
                   context:
                       - DockerCreds
                   requires:
-                      - python38
-                      - python310
+                      - python311
                   filters:
                       branches:
                           only:
@@ -287,8 +262,7 @@ workflows:
             - docker_branch_hold:
                   type: approval
                   requires:
-                      - python38
-                      - python310
+                      - python311
                   filters:
                       branches:
                           ignore:
@@ -304,20 +278,18 @@ workflows:
                   context:
                       - DockerCreds
                   requires:
-                      - python38
-                      - python310
+                      - python311
                   filters:
                       tags:
                           only: /^v0\.6\.[0-9.]+((a|b|rc)[0-9])?$/
                       branches:
                           ignore: /.*/
 
-            - build_container_tags_06x:
+            - build_container_tags_07x:
                   context:
                       - DockerCreds
                   requires:
-                      - python38
-                      - python310
+                      - python311
                   filters:
                       tags:
                           only: /^v0\.6\.[0-9]+$/
