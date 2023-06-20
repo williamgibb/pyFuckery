@@ -186,7 +186,7 @@ jobs:
                   name: create packages
                   command: |
                       . venv/bin/activate
-                      python pyproject.toml sdist bdist_wheel
+                      python -m build
 
             - run:
                   name: smoke packages
