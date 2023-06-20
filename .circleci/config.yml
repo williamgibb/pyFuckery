@@ -83,7 +83,7 @@ jobs:
     python311:
         parallelism: 2
         docker:
-            - image: circleci/python:3.11
+            - image: cimg/python:3.11
               environment:
                   RUN_SYNTAX: 1
                   COVERAGE_ARGS: --cov fuckery --no-cov-on-fail --cov-report=xml
@@ -150,7 +150,7 @@ jobs:
         environment:
             PYPI_SMOKE_CODE: import fuckery; print(fuckery.__version__)
         docker:
-            - image: circleci/python:3.10
+            - image: cimg/python:3.10
         steps:
             - checkout
 
