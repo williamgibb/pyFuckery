@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'fuckery'
-version = '0.7.0'
+version = '0.7.1'
 authors = [
     { name = 'William Gibb', email = 'williamgibb@gmail.com'},
 ]
@@ -28,7 +28,7 @@ classifiers = [
         'Topic :: Software Development :: Interpreters',
 ]
 dependencies = [
-    'lark-parser>=0.7.0,<0.8.0',
+    'lark-parser>=0.7.1,<0.8.0',
     'msgpack>=1.0.4,<1.1.0',
 ]
 
