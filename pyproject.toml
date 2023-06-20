@@ -1,0 +1,44 @@
+[build-system]
+requires = ['setuptools>=68.0.0', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'fuckery'
+version = '0.6.0'
+authors = [
+    { name = 'William Gibb', email = 'williamgibb@gmail.com'},
+]
+description = 'Python Brainfuck implementation.'
+readme = 'README.rst'
+requires-python = '>=3.11'
+license = { text = 'BSD' }
+classifiers = [
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Information Technology',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: Unix',
+        'Operating System :: POSIX',
+        'Operating System :: Microsoft :: Windows',
+        'Programming Language :: Other',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Topic :: Software Development :: Interpreters',
+]
+dependencies = [
+    'lark-parser>=0.7.0,<0.8.0',
+    'msgpack>=1.0.4,<1.1.0',
+]
+
+[project.scripts]
+fuckery = 'fuckery.cli:_main'
+
+[project.urls]
+Documentation = 'https://pyfuckery.readthedocs.io/en/latest/'
+Repository = 'https://github.com/williamgibb/pyFuckery'
+Changelog = 'https://github.com/williamgibb/pyFuckery/blob/master/CHANGELOG.rst'
+
+[tool.setuptools]
+include-package-data = true

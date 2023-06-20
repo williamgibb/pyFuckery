@@ -1,16 +1,15 @@
 # vim:set ft=dockerfile:
 
-FROM python:3.10
+FROM python:3.11
 
 COPY tests/assets /bf
 COPY src /build/src
-COPY setup.py /build/setup.py
 COPY README.rst /build/README.rst
-COPY CHANGELOG.rst /build/CHANGELOG.rst
+COPY pyproject.toml /build/pyproject.toml
+
 
 RUN cd /build && \
-    python setup.py build bdist_wheel && \
-    python -m pip install dist/*.whl && \
+    python -m pip install --verbose . && \
     rm -rf /build
 
 ENTRYPOINT ["python", "-m", "fuckery", "-i", "/bf/hello_world.bf"]

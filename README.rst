@@ -14,7 +14,7 @@ Overview
         | |codecov|
         | |codeclimate|
     * - package
-      - | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+      - | |version| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
 
 .. |docs| image:: https://readthedocs.org/projects/pyfuckery/badge/?style=flat
