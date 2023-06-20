@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.7.0 (2023-06-18)
+------------------
+* Use Python 3.11 as a release target. Drop 3.8 and 3.10 as build / release targets.
+* Move docker image to using python:3.11.
+
 0.6.0 (2023-01-22)
 ------------------
 * Drop 3.6 and 3.7 support. Add 3.8 and 3.10 as build / release targets.
