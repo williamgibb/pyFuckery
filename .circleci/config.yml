@@ -279,7 +279,7 @@ workflows:
                       - python311
                   filters:
                       tags:
-                          only: /^v0\.6\.[0-9.]+((a|b|rc)[0-9])?$/
+                          only: /^v0\.7\.[0-9.]+((a|b|rc)[0-9])?$/
                       branches:
                           ignore: /.*/
 
@@ -290,6 +290,6 @@ workflows:
                       - python311
                   filters:
                       tags:
-                          only: /^v0\.6\.[0-9]+$/
+                          only: /^v0\.7\.[0-9]+$/
                       branches:
                           ignore: /.*/
