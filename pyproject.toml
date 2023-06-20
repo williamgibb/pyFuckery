@@ -43,6 +43,3 @@ Changelog = 'https://github.com/williamgibb/pyFuckery/blob/master/CHANGELOG.rst'
 
 [tool.setuptools]
 include-package-data = true
-
-[tool.setuptools.packages.find]
-include = ["src/fuckery"]
