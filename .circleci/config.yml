@@ -150,7 +150,7 @@ jobs:
         environment:
             PYPI_SMOKE_CODE: import fuckery; print(fuckery.__version__)
         docker:
-            - image: cimg/python:3.10
+            - image: cimg/python:3.11
         steps:
             - checkout
 
