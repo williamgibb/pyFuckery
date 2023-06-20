@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.7.1 (2023-06-18)
+----------------------------------------
+* CI change to fix tag builds.
+
 0.7.0 (2023-06-18)
 ------------------
 * Use Python 3.11 as a release target. Drop 3.8 and 3.10 as build / release targets.
